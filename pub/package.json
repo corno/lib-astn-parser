@@ -1,0 +1,31 @@
+{
+  "author": "Corno",
+  "bin": {},
+  "dependencies": {
+    "api-astn-handlers": "^0.0.0",
+    "api-astn-tokenconsumer": "^0.0.0",
+    "pareto-core-lib": "^0.4.0",
+    "pareto-core-state": "^0.4.0"
+  },
+  "foo": "bar",
+  "files": [
+    "dist",
+    "data"
+  ],
+  "keywords": [],
+  "main": "./dist/index.js",
+  "bugs": {
+    "url": "https://github.com/corno/astn/issues"
+  },
+  "description": "parser for ASTN",
+  "homepage": "https://github.com/corno/astn#readme",
+  "license": "ISC",
+  "name": "astn-parser-lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corno/astn-parser-lib.git"
+  },
+  "types": "dist/index.d.ts",
+  "version": "0.23.0",
+  "content-fingerprint": "eff813654f0e38198d8c09b9ae81bd4fc5905298"
+}
