@@ -4,7 +4,7 @@ import * as pc from "pareto-core-candidates"
 
 pl.logDebugMessage("no tests yet")
 
-import * as lib from "../../../pub/dist"
+import * as lib from "../../../pub"
 import * as fsRes from "pareto-filesystem-res"
 
 import * as at from "astn-tokenizer-lib"

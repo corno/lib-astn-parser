@@ -1,7 +1,7 @@
 import * as grammar from "astn-handlers-api"
 
-export function createDummyRequiredValueHandler<Annotation>(
-): grammar.IRequiredValueHandler<Annotation> {
+export function createDummyRequiredValueHandler<PAnnotation>(
+): grammar.IRequiredValueHandler<PAnnotation> {
     return {
         exists: createDummyValueHandler(),
         missing: () => {
@@ -11,8 +11,8 @@ export function createDummyRequiredValueHandler<Annotation>(
     }
 }
 
-export function createDummyValueHandler<Annotation>(
-): grammar.IValueHandler<Annotation> {
+export function createDummyValueHandler<PAnnotation>(
+): grammar.IValueHandler<PAnnotation> {
     return {
         array: () => createDummyArrayHandler(),
         object: () => createDummyObjectHandler(),
@@ -22,8 +22,8 @@ export function createDummyValueHandler<Annotation>(
     }
 }
 
-export function createDummyTaggedUnionHandler<Annotation>(
-): grammar.ITaggedUnionHandler<Annotation> {
+export function createDummyTaggedUnionHandler<PAnnotation>(
+): grammar.ITaggedUnionHandler<PAnnotation> {
     return {
         option: () => createDummyRequiredValueHandler(),
         missingOption: () => createDummyRequiredValueHandler(),
@@ -31,16 +31,16 @@ export function createDummyTaggedUnionHandler<Annotation>(
     }
 }
 
-export function createDummyArrayHandler<Annotation>(
-): grammar.IArrayHandler<Annotation> {
+export function createDummyArrayHandler<PAnnotation>(
+): grammar.IArrayHandler<PAnnotation> {
     return {
         element: () => createDummyValueHandler(),
         onEnd: () => { },
     }
 }
 
-export function createDummyObjectHandler<Annotation>(
-): grammar.IObjectHandler<Annotation> {
+export function createDummyObjectHandler<PAnnotation>(
+): grammar.IObjectHandler<PAnnotation> {
     return {
         property: () => {
             return createDummyRequiredValueHandler()

@@ -6,16 +6,16 @@ import * as tc from "astn-tokenconsumer-api"
 import * as th from "astn-handlers-api"
 
 
-export function createFlattener<Annotation>(
+export function createFlattener<PAnnotation>(
     onToken: ($: {
         token: tc.Token,
         annotation: Annotation,
     }) => void,
     taggedUnionEnd: () => void,
     missing: () => void,
-): th.IRequiredValueHandler<Annotation> {
+): th.IRequiredValueHandler<PAnnotation> {
     function wrap(
-    ): th.IRequiredValueHandler<Annotation> {
+    ): th.IRequiredValueHandler<PAnnotation> {
         return {
             exists: createValueHandler(),
             missing: missing,
@@ -32,7 +32,7 @@ export function createFlattener<Annotation>(
         })
     }
 
-    function doSimpleString($: th.SimpleStringToken<Annotation>) {
+    function doSimpleString($: th.SimpleStringToken<PAnnotation>) {
         onEvent(
             ["simple string", {
                 value: $.token.value,
@@ -53,7 +53,7 @@ export function createFlattener<Annotation>(
         )
     }
     function createValueHandler(
-    ): th.IValueHandler<Annotation> {
+    ): th.IValueHandler<PAnnotation> {
         return {
             array: ($) => {
                 const open$ = $
@@ -62,9 +62,9 @@ export function createFlattener<Annotation>(
                         "type": ((): ap.StructuralTokenType => {
                             switch ($.token.token.type[0]) {
                                 case "list":
-                                    return ["open list", {}]
+                                    return ["open list", null]
                                 case "shorthand group":
-                                    return ["open shorthand group", {}]
+                                    return ["open shorthand group", null]
                                 default:
                                     return pl.au($.token.token.type[0])
                             }
@@ -82,9 +82,9 @@ export function createFlattener<Annotation>(
                                 "type": ((): ap.StructuralTokenType => {
                                     switch (open$.token.token.type[0]) {
                                         case "list":
-                                            return ["close list", {}]
+                                            return ["close list", null]
                                         case "shorthand group":
-                                            return ["close shorthand group", {}]
+                                            return ["close shorthand group", null]
                                         default:
                                             return pl.au(open$.token.token.type[0])
                                     }
@@ -102,9 +102,9 @@ export function createFlattener<Annotation>(
                         "type": ((): ap.StructuralTokenType => {
                             switch ($.token.token.type[0]) {
                                 case "dictionary":
-                                    return ["open dictionary", {}]
+                                    return ["open dictionary", null]
                                 case "verbose group":
-                                    return ["open verbose group", {}]
+                                    return ["open verbose group", null]
                                 default:
                                     return pl.au($.token.token.type[0])
                             }
@@ -127,9 +127,9 @@ export function createFlattener<Annotation>(
                                 "type": ((): ap.StructuralTokenType => {
                                     switch (open$.token.token.type[0]) {
                                         case "dictionary":
-                                            return ["close dictionary", {}]
+                                            return ["close dictionary", null]
                                         case "verbose group":
-                                            return ["close verbose group", {}]
+                                            return ["close verbose group", null]
                                         default:
                                             return pl.au(open$.token.token.type[0])
                                     }
@@ -156,7 +156,7 @@ export function createFlattener<Annotation>(
             taggedUnion: ($) => {
                 onEvent(
                     ["structural", {
-                        "type": ["tagged union start", {}],
+                        "type": ["tagged union start", null],
                     }],
                     $.token.annotation
                 )

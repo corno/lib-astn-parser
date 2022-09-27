@@ -10,7 +10,7 @@ import * as toklib from "astn-tokenizer-lib"
 import * as testLib from "pareto-test-lib"
 
 import { getTests } from "../imp/getTests"
-import * as lib from "../../../pub/dist"
+import * as lib from "../../../pub"
 
 import { test } from "../imp/index3"
 

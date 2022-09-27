@@ -2,7 +2,6 @@
   "dependencies": {
     "api-astn-handlers": "^0.0.0",
     "lib-astn-tokenizer": "^0.0.0",
-    "pareto-core-async": "^0.26.0",
     "pareto-core-exe": "^0.3.0",
     "pareto-filesystem-lib": "^0.38.0",
     "res-pareto-filesystem": "^0.0.0",

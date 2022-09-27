@@ -4,18 +4,18 @@ import * as inf from "../../interface"
 import * as tc from "astn-tokenconsumer-api"
 import { createHeaderErrorMessage } from "./createHeaderErrorMessage"
 
-export function createCreateHeaderParser<Annotation>(
+export function createCreateHeaderParser<PAnnotation>(
     $x: {
         onError: ($: {
             error: inf.HeaderError
             annotation: Annotation
         }) => void
     }
-): inf.CreateHeaderParser<Annotation> {
+): inf.CreateHeaderParser<PAnnotation> {
     return ($y) => {
         type RootContext = {
             state:
-            | ["expecting header or body", {}]
+            | ["expecting header or body", null]
             | ["expecting schema reference or embedded schema", {
                 headerAnnotation: Annotation
             }]
@@ -24,11 +24,11 @@ export function createCreateHeaderParser<Annotation>(
                 embeddedSchemaAnnotation: Annotation
             }]
             | ["header is parsed", {
-                parser: tc.ITokenConsumer<Annotation>
+                parser: tc.ITokenConsumer<PAnnotation>
             }]
         }
 
-        const rootContext: RootContext = { state: ["expecting header or body", {}] }
+        const rootContext: RootContext = { state: ["expecting header or body", null] }
 
         return {
             onEnd: (annotation) => {
@@ -41,15 +41,15 @@ export function createCreateHeaderParser<Annotation>(
                 switch (rootContext.state[0]) {
                     case "expecting header or body": {
                         //const $ = rootContext.state[1]
-                        raiseError(["expected the schema start (!) or root value", {}])
+                        raiseError(["expected the schema start (!) or root value", null])
                         break
                     }
                     case "expecting schema reference or embedded schema": {
-                        raiseError(["expected a schema reference or an embedded schema", {}])
+                        raiseError(["expected a schema reference or an embedded schema", null])
                         break
                     }
                     case "expecting schema schema reference": {
-                        raiseError(["expected a schema schema reference", {}])
+                        raiseError(["expected a schema schema reference", null])
                         break
                     }
                     case "header is parsed": {
@@ -99,7 +99,7 @@ export function createCreateHeaderParser<Annotation>(
 
                             case "structural": {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(["expected a schema reference or an embedded schema", {}])
+                                    raiseError(["expected a schema reference or an embedded schema", null])
                                 })
                                 break
                             }
@@ -120,7 +120,7 @@ export function createCreateHeaderParser<Annotation>(
                             }
                             case "multiline string": {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(["expected an embedded schema", {}])
+                                    raiseError(["expected an embedded schema", null])
                                 })
                                 break
                             }
@@ -135,7 +135,7 @@ export function createCreateHeaderParser<Annotation>(
                         const headerAnnotation = rootContext.state[1].headerAnnotation
                         const embeddedSchemaAnnotation = rootContext.state[1].embeddedSchemaAnnotation
                         if ($.token[0] !== "simple string") {
-                            raiseError(["expected a schema schema reference", {}])
+                            raiseError(["expected a schema schema reference", null])
                         } else {
                             const x = $y.handler.onEmbeddedSchema({
                                 headerAnnotation: headerAnnotation,
@@ -206,7 +206,7 @@ export function createCreateHeaderParser<Annotation>(
 }
 
 
-export function createCreateHeaderParserWithSerializedError<Annotation>(
+export function createCreateHeaderParserWithSerializedError<PAnnotation>(
     $x: {
         onError: (
             $: {
@@ -215,7 +215,7 @@ export function createCreateHeaderParserWithSerializedError<Annotation>(
             }
         ) => void
     },
-): inf.CreateHeaderParser<Annotation> {
+): inf.CreateHeaderParser<PAnnotation> {
     return createCreateHeaderParser(
         {
             onError: ($) => {

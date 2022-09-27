@@ -5,16 +5,16 @@ import { IHeaderHandler } from "./interfaces/IHeaderHandler"
 import { HeaderError } from "./types/HeaderError"
 import { TreeParserError } from "./types/TreeParserError"
 
-export type CreateCreateHeaderParser = <Annotation>(
+export type CreateCreateHeaderParser = <PAnnotation>(
     $i: {
         onError: ($: {
             error: HeaderError
             annotation: Annotation
         }) => void
     }
-) => CreateHeaderParser<Annotation>
+) => CreateHeaderParser<PAnnotation>
 
-export type CreateCreateTreeParser = <Annotation>(
+export type CreateCreateTreeParser = <PAnnotation>(
     $i: {
         onError: ($: {
             error: TreeParserError
@@ -22,9 +22,9 @@ export type CreateCreateTreeParser = <Annotation>(
         }) => void
     }
     
-) => CreateTreeParser<Annotation>
+) => CreateTreeParser<PAnnotation>
 
-export type CreateCreateHeaderParserWithSerializedError = <Annotation>(
+export type CreateCreateHeaderParserWithSerializedError = <PAnnotation>(
     $i: {
         onError: (
             $: {
@@ -33,9 +33,9 @@ export type CreateCreateHeaderParserWithSerializedError = <Annotation>(
             }
         ) => void
     },
-) => CreateHeaderParser<Annotation>
+) => CreateHeaderParser<PAnnotation>
 
-export type CreateCreateTreeParserWithSerializedError = <Annotation>(
+export type CreateCreateTreeParserWithSerializedError = <PAnnotation>(
     $i: {
         onError: (
             $: {
@@ -45,18 +45,18 @@ export type CreateCreateTreeParserWithSerializedError = <Annotation>(
         ) => void
     },
     
-) => CreateTreeParser<Annotation>
+) => CreateTreeParser<PAnnotation>
 
 
-export type CreateHeaderParser <Annotation> =(
+export type CreateHeaderParser <PAnnotation> =(
     $i: {
-        handler: IHeaderHandler<Annotation>
+        handler: IHeaderHandler<PAnnotation>
     }
-) => tc.ITokenConsumer<Annotation>
+) => tc.ITokenConsumer<PAnnotation>
 
-export type CreateTreeParser <Annotation> =(
+export type CreateTreeParser <PAnnotation> =(
     $p: {
-        handler: h.ITreeHandler<Annotation>
+        handler: h.ITreeHandler<PAnnotation>
     }
     
-) => tc.ITokenConsumer<Annotation>
+) => tc.ITokenConsumer<PAnnotation>

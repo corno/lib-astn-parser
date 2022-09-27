@@ -7,7 +7,7 @@ import * as pt from "pareto-core-types"
 import * as pc from "pareto-core-candidates"
 import * as h from "astn-handlers-api"
 
-import * as lib from "../../../pub/dist"
+import * as lib from "../../../pub"
 
 import { ownJSONTests } from "../data/ownJSONTestset"
 import { extensionTests } from "../data/ASTNTestSet"

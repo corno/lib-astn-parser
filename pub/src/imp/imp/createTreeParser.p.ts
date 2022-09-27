@@ -6,39 +6,39 @@ import * as papi from "astn-tokenconsumer-api"
 import * as inf from "../../interface"
 import { createTreeParserErrorMessage } from "./createTreeParserErrorMessage"
 
-export function createCreateTreeParser<Annotation>($x: {
+export function createCreateTreeParser<PAnnotation>($x: {
     onError: ($: {
         error: inf.TreeParserError,
         annotation: Annotation,
     }) => void
 
-}): inf.CreateTreeParser<Annotation> {
+}): inf.CreateTreeParser<PAnnotation> {
     return ($i) => {
 
         function createTreeParser(
-        ): papi.ITokenConsumer<Annotation> {
+        ): papi.ITokenConsumer<PAnnotation> {
 
             type ObjectContext = {
                 type:
-                | ["dictionary", {}]
-                | ["verbose group", {}]
-                readonly objectHandler: h.IObjectHandler<Annotation>
+                | ["dictionary", null]
+                | ["verbose group", null]
+                readonly objectHandler: h.IObjectHandler<PAnnotation>
             }
 
             type ArrayContext = {
                 type:
-                | ["list", {}]
-                | ["shorthand group", {}]
+                | ["list", null]
+                | ["shorthand group", null]
                 foundElements: boolean
-                readonly arrayHandler: h.IArrayHandler<Annotation>
+                readonly arrayHandler: h.IArrayHandler<PAnnotation>
             }
 
             type TaggedUnionContext = {
-                readonly handler: h.ITaggedUnionHandler<Annotation>
+                readonly handler: h.ITaggedUnionHandler<PAnnotation>
             }
 
             type ExpectingValue = {
-                handler: h.IRequiredValueHandler<Annotation>
+                handler: h.IRequiredValueHandler<PAnnotation>
             }
 
             type ContextType =
@@ -54,7 +54,7 @@ export function createCreateTreeParser<Annotation>($x: {
 
             type State2 =
                 | ["processing", Processing]
-                | ["done", {}]
+                | ["done", null]
 
             let state2: State2 = ["processing", {
                 currentContext: ["expecting value", {
@@ -119,17 +119,17 @@ export function createCreateTreeParser<Annotation>($x: {
                                         processing.currentContext = newContext
                                     }
                                     function testForValue(
-                                        onValue: () => h.IValueHandler<Annotation>,
+                                        onValue: () => h.IValueHandler<PAnnotation>,
                                         onNonValue: (
                                             token:
-                                                | ["close object", {}]
-                                                | ["close array", {}]
+                                                | ["close object", null]
+                                                | ["close array", null]
                                         ) => void,
                                         onTerminal: () => void,
                                     ) {
                                         switch (token.token[0]) {
                                             case "header start": {
-                                                raiseError(["unexpected header start", {}])
+                                                raiseError(["unexpected header start", null])
                                                 break
                                             }
                                             case "structural": {
@@ -137,22 +137,22 @@ export function createCreateTreeParser<Annotation>($x: {
                                                 const punctuation = token.token[1]
                                                 switch (punctuation.type[0]) {
                                                     case "close shorthand group":
-                                                        onNonValue(["close array", {}])
+                                                        onNonValue(["close array", null])
                                                         break
                                                     case "close list":
-                                                        onNonValue(["close array", {}])
+                                                        onNonValue(["close array", null])
                                                         break
                                                     case "open shorthand group":
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
                                                                 ["processing array", {
                                                                     foundElements: false,
-                                                                    type: ["shorthand group", {}],
+                                                                    type: ["shorthand group", null],
                                                                     arrayHandler: onValue().array({
                                                                         token: {
                                                                             annotation: token.annotation,
                                                                             token: {
-                                                                                type: ["shorthand group", {}]
+                                                                                type: ["shorthand group", null]
                                                                             }
                                                                         }
 
@@ -166,12 +166,12 @@ export function createCreateTreeParser<Annotation>($x: {
                                                             push(
                                                                 ["processing array", {
                                                                     foundElements: false,
-                                                                    type: ["list", {}],
+                                                                    type: ["list", null],
                                                                     arrayHandler: onValue().array({
                                                                         token: {
                                                                             annotation: token.annotation,
                                                                             token: {
-                                                                                type: ["list", {}]
+                                                                                type: ["list", null]
                                                                             }
                                                                         }
 
@@ -181,21 +181,21 @@ export function createCreateTreeParser<Annotation>($x: {
                                                         })
                                                         break
                                                     case "close dictionary":
-                                                        onNonValue(["close object", {}])
+                                                        onNonValue(["close object", null])
                                                         break
                                                     case "close verbose group":
-                                                        onNonValue(["close object", {}])
+                                                        onNonValue(["close object", null])
                                                         break
                                                     case "open dictionary":
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
                                                                 ["processing object", {
-                                                                    type: ["dictionary", {}],
+                                                                    type: ["dictionary", null],
                                                                     objectHandler: onValue().object({
                                                                         token: {
                                                                             annotation: token.annotation,
                                                                             token: {
-                                                                                type: ["dictionary", {}]
+                                                                                type: ["dictionary", null]
                                                                             }
                                                                         }
                                                                     }),
@@ -208,12 +208,12 @@ export function createCreateTreeParser<Annotation>($x: {
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
                                                                 ["processing object", {
-                                                                    type: ["verbose group", {}],
+                                                                    type: ["verbose group", null],
                                                                     objectHandler: onValue().object({
                                                                         token: {
                                                                             annotation: token.annotation,
                                                                             token: {
-                                                                                type: ["verbose group", {}]
+                                                                                type: ["verbose group", null]
                                                                             }
                                                                         }
                                                                     }),
@@ -229,7 +229,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                                                         token: {
                                                                             annotation: token.annotation,
                                                                             token: {
-                                                                                // type: ["shorthand group", {}]
+                                                                                // type: ["shorthand group", null]
                                                                             }
                                                                         }
 
@@ -281,7 +281,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                                 testForValue(
                                                     () => $.handler.exists,
                                                     ($$) => {
-                                                        raiseError(["missing value", {}])
+                                                        raiseError(["missing value", null])
                                                         $.handler.missing({
                                                             annotation: token.annotation
                                                         })
@@ -305,7 +305,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                                         switch ($[0]) {
                                                             case "close object":
                                                                 pl.cc($[1], ($) => {
-                                                                    raiseError(["unexpected end of object", {}])
+                                                                    raiseError(["unexpected end of object", null])
                                                                 })
                                                                 break
                                                             case "close array":
@@ -345,7 +345,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                                 } else {
                                                     testForValue(
                                                         () => {
-                                                            raiseError(["missing key", {}])
+                                                            raiseError(["missing key", null])
                                                             return objectContext.objectHandler.anonymousProperty({
                                                                 annotation: token.annotation
                                                             })
@@ -360,7 +360,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                                                 })
                                                                 pop()
                                                             } else {
-                                                                raiseError(["missing object close", {}])
+                                                                raiseError(["missing object close", null])
 
                                                                 pop()
                                                                 handleToken()
@@ -391,13 +391,13 @@ export function createCreateTreeParser<Annotation>($x: {
                                                     //we have an error
                                                     testForValue(
                                                         () => {
-                                                            raiseError(["missing option", {}])
+                                                            raiseError(["missing option", null])
                                                             return tuh.handler.missingOption({
                                                                 annotation: token.annotation
                                                             }).exists
                                                         },
                                                         () => {
-                                                            raiseError(["missing tagged union option and value", {}])
+                                                            raiseError(["missing tagged union option and value", null])
                                                             pop()
                                                             handleToken()
                                                         },
@@ -414,7 +414,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                 break
                             case "done":
                                 pl.cc(state2[1], ($) => {
-                                    raiseError(["unexpected data after end", {}])
+                                    raiseError(["unexpected data after end", null])
                                 })
                                 break
                             default: pl.au(state2[0])
@@ -435,7 +435,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                 const state = $
                                 switch (state.currentContext[0]) {
                                     case "expecting value": {
-                                        raiseError(["missing value", {}])
+                                        raiseError(["missing value", null])
                                         state.currentContext[1].handler.missing({
                                             annotation: endAnnotation
                                         })
@@ -444,12 +444,12 @@ export function createCreateTreeParser<Annotation>($x: {
                                     }
                                     case "processing array": {
                                         const $ = state.currentContext[1]
-                                        raiseError(["unexpected end of text", { "still in": ["array", {}] }])
+                                        raiseError(["unexpected end of text", { "still in": ["array", null] }])
                                         break
                                     }
                                     case "processing object": {
                                         const $ = state.currentContext[1]
-                                        raiseError(["unexpected end of text", { "still in": ["object", {}] }])
+                                        raiseError(["unexpected end of text", { "still in": ["object", null] }])
                                         break
                                     }
                                     case "processing taggedunion": {
@@ -458,7 +458,7 @@ export function createCreateTreeParser<Annotation>($x: {
                                             annotation: endAnnotation
                                         })
 
-                                        raiseError(["unexpected end of text", { "still in": ["tagged union", {}] }])
+                                        raiseError(["unexpected end of text", { "still in": ["tagged union", null] }])
 
                                         break
                                     }
@@ -481,7 +481,7 @@ export function createCreateTreeParser<Annotation>($x: {
 }
 
 
-export function createCreateTreeParserWithSerializedError<Annotation>(
+export function createCreateTreeParserWithSerializedError<PAnnotation>(
     $x: {
         onError: (
             $: {
@@ -490,7 +490,7 @@ export function createCreateTreeParserWithSerializedError<Annotation>(
             }
         ) => void
     },
-): inf.CreateTreeParser<Annotation> {
+): inf.CreateTreeParser<PAnnotation> {
     return createCreateTreeParser(
         {
             onError: ($) => {

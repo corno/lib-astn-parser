@@ -65,7 +65,7 @@ export function getTests(
                         return {
                             type: ["test", {
                                 success: foundErrors === expectErrors,
-                                type: ["boolean", {}]
+                                type: ["boolean", null]
                             }]
                         }
                     })
