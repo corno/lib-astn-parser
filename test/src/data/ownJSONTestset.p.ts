@@ -1,10 +1,10 @@
 /* eslint
     max-len: "off"
 */
-import * as td from "../interface"
+import * as api from "../interface"
 
 
-export const ownJSONTests: td.TestDefinitions = {
+export const ownJSONTests: api.TTestDefinitions = {
     "empty": {
         text: '',
         events: [

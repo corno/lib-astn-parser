@@ -1,8 +1,8 @@
 import * as pl from "pareto-core-lib"
 
-import * as inf from "../../interface"
+import * as api from "../../interface"
 
-export function createTreeParserErrorMessage(error: inf.TreeParserError): string {
+export function createTreeParserErrorMessage(error: api.TTreeParserError): string {
     switch (error[0]) {
         case "missing array close": {
             return error[0]

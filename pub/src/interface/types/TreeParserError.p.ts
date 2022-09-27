@@ -1,6 +1,6 @@
 
 
-export type TreeParserError =
+export type TTreeParserError =
     | ["missing array close", null]
     | ["missing key", null]
     | ["missing object close", null]

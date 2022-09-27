@@ -2,10 +2,10 @@
   "author": "Corno",
   "bin": {},
   "dependencies": {
-    "api-astn-handlers": "^0.0.0",
-    "api-astn-tokenconsumer": "^0.0.0",
-    "pareto-core-lib": "^0.4.0",
-    "pareto-core-state": "^0.4.0"
+    "api-astn-handlers": "^0.3.0",
+    "api-astn-tokenconsumer": "^0.4.0",
+    "pareto-core-lib": "^0.13.0",
+    "pareto-core-state": "^0.10.0"
   },
   "foo": "bar",
   "files": [
@@ -27,5 +27,6 @@
   },
   "types": "dist/index.d.ts",
   "version": "0.23.0",
-  "content-fingerprint": "eff813654f0e38198d8c09b9ae81bd4fc5905298"
+  "interface-fingerprint": "03acab20b48483e8b6fae929e2513c217596b229",
+  "content-fingerprint": "6b8d725d9f767ff59f8a9c03361c004776aa00d4"
 }

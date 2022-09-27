@@ -1,16 +1,15 @@
-import * as tc from "astn-tokenconsumer-api"
-import * as h from "astn-handlers-api"
-
+import * as tc from "api-astn-tokenconsumer"
+import * as h from "api-astn-handlers"
 
 export type IHeaderHandler<PAnnotation> = {
-    onEmbeddedSchema: ($: {
-        headerAnnotation: Annotation
-        embeddedSchemaAnnotation: Annotation
-        schemaSchemaReferenceToken: h.SimpleStringToken<PAnnotation>
+    readonly "onEmbeddedSchema": ($: {
+        readonly "headerAnnotation": PAnnotation
+        readonly "embeddedSchemaAnnotation": PAnnotation
+        readonly "schemaSchemaReferenceToken": h.TSimpleStringToken<PAnnotation>
     }) => tc.ITokenConsumer<PAnnotation>
-    onSchemaReference: ($: {
-        headerAnnotation: Annotation
-        token: h.SimpleStringToken<PAnnotation>
+    readonly "onSchemaReference": ($: {
+        readonly "headerAnnotation": PAnnotation
+        readonly "token": h.TSimpleStringToken<PAnnotation>
     }) => tc.ITokenConsumer<PAnnotation>
-    onNoInternalSchema: ($: { }) => tc.ITokenConsumer<PAnnotation>
+    readonly "onNoInternalSchema": () => tc.ITokenConsumer<PAnnotation>
 }

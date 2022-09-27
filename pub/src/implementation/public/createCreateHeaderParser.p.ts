@@ -1,27 +1,27 @@
 import * as pl from "pareto-core-lib"
 
-import * as inf from "../../interface"
-import * as tc from "astn-tokenconsumer-api"
-import { createHeaderErrorMessage } from "./createHeaderErrorMessage"
+import * as tc from "api-astn-tokenconsumer"
+
+import * as api from "../../interface"
 
 export function createCreateHeaderParser<PAnnotation>(
     $x: {
         onError: ($: {
-            error: inf.HeaderError
-            annotation: Annotation
+            error: api.THeaderError
+            annotation: PAnnotation
         }) => void
     }
-): inf.CreateHeaderParser<PAnnotation> {
+): api.FCreateHeaderParser<PAnnotation> {
     return ($y) => {
         type RootContext = {
             state:
             | ["expecting header or body", null]
             | ["expecting schema reference or embedded schema", {
-                headerAnnotation: Annotation
+                headerAnnotation: PAnnotation
             }]
             | ["expecting schema schema reference", {
-                headerAnnotation: Annotation
-                embeddedSchemaAnnotation: Annotation
+                headerAnnotation: PAnnotation
+                embeddedSchemaAnnotation: PAnnotation
             }]
             | ["header is parsed", {
                 parser: tc.ITokenConsumer<PAnnotation>
@@ -32,7 +32,7 @@ export function createCreateHeaderParser<PAnnotation>(
 
         return {
             onEnd: (annotation) => {
-                function raiseError(error: inf.HeaderError) {
+                function raiseError(error: api.THeaderError) {
                     $x.onError({
                         error: error,
                         annotation: annotation,
@@ -63,7 +63,7 @@ export function createCreateHeaderParser<PAnnotation>(
             },
             onToken: ($) => {
                 const data = $
-                function raiseError(error: inf.HeaderError) {
+                function raiseError(error: api.THeaderError) {
                     $x.onError({
                         error: error,
                         annotation: $.annotation,
@@ -78,7 +78,7 @@ export function createCreateHeaderParser<PAnnotation>(
                             }]
                         } else {
 
-                            const bp = $y.handler.onNoInternalSchema({})
+                            const bp = $y.handler.onNoInternalSchema()
                             rootContext.state = ["header is parsed", {
                                 parser: bp,
                             }]
@@ -203,29 +203,4 @@ export function createCreateHeaderParser<PAnnotation>(
             },
         }
     }
-}
-
-
-export function createCreateHeaderParserWithSerializedError<PAnnotation>(
-    $x: {
-        onError: (
-            $: {
-                error: string,
-                annotation: Annotation,
-            }
-        ) => void
-    },
-): inf.CreateHeaderParser<PAnnotation> {
-    return createCreateHeaderParser(
-        {
-            onError: ($) => {
-                $x.onError(
-                    {
-                        error: `${createHeaderErrorMessage($.error)}`,
-                        annotation: $.annotation,
-                    }
-                )
-            }
-        }
-    )
 }

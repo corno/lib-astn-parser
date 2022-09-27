@@ -1,10 +1,10 @@
 /* eslint
     camelcase:"off",
 */
-import * as td from "../interface"
+import * as api from "../interface"
 
 
-export const extensionTests: td.TestDefinitions = {
+export const extensionTests: api.TTestDefinitions = {
     "unexpected data after end": {
         text: '"foo" "bar"',
         events: [

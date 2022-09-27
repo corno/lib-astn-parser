@@ -1,18 +1,18 @@
-export type TestRange = [number?, number?, number?, number?]
-export type TestLocation = [number?, number?]
+export type TTestRange = [number?, number?, number?, number?]
+export type TTestLocation = [number?, number?]
 
-export type EventDefinition =
-    | ["token", "simple string", string, TestRange | null]
-    | ["token", "multiline string", string, TestRange | null]
-    | ["token", "openarray", string | null, TestRange | null]
-    | ["token", "closearray", TestRange | null]
-    | ["token", "openobject", string | null, TestRange | null]
-    | ["token", "closeobject", TestRange | null]
-    | ["token", "opentaggedunion", TestRange | null]
-    | ["token", "linecomment", string, TestRange | null]
-    | ["token", "blockcomment", string, TestRange | null]
-    | ["parsingerror", string, TestRange | null]
-    | ["token", "schema data start", TestRange?]
+export type TEventDefinition =
+    | ["token", "simple string", string, TTestRange | null]
+    | ["token", "multiline string", string, TTestRange | null]
+    | ["token", "openarray", string | null, TTestRange | null]
+    | ["token", "closearray", TTestRange | null]
+    | ["token", "openobject", string | null, TTestRange | null]
+    | ["token", "closeobject", TTestRange | null]
+    | ["token", "opentaggedunion", TTestRange | null]
+    | ["token", "linecomment", string, TTestRange | null]
+    | ["token", "blockcomment", string, TTestRange | null]
+    | ["parsingerror", string, TTestRange | null]
+    | ["token", "schema data start", TTestRange?]
     | ["stream end", null]
     | ["instance data start"]
     | ["validationerror", string]
@@ -21,16 +21,16 @@ export type EventDefinition =
     | ["missing"]
 // [AnyEvent, string?, number?, number?]
 
-export type TestDefinition = {
+export type TTestDefinition = {
     readonly skipRoundTripCheck?: boolean
     readonly text: string
     readonly testHeaders?: boolean
     readonly testForLocation?: boolean
     readonly chunks?: string[]
-    readonly events: EventDefinition[]
+    readonly events: TEventDefinition[]
     readonly formattedText?: string
 }
 
-export type TestDefinitions = {
-    readonly [key: string]: TestDefinition
+export type TTestDefinitions = {
+    readonly [key: string]: TTestDefinition
 }

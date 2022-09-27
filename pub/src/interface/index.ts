@@ -1,7 +1,7 @@
-export * from "./types/TreeParserError"
-export * from "./types/HeaderError"
-export * from "./creators"
-export * from "./functions"
+export * from "./types/TreeParserError.p"
+export * from "./types/HeaderError.p"
+export * from "./functions/creators.p"
+export * from "./functions/errorMessages.p"
 
 
-export * from "./interfaces/IHeaderHandler"
+export * from "./interfaces/IHeaderHandler.p"
