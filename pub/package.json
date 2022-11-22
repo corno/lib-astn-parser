@@ -3,8 +3,7 @@
   "dependencies": {
     "api-astn-handlers": "^0.3.0",
     "api-astn-tokenconsumer": "^0.4.0",
-    "pareto-core-lib": "^0.13.0",
-    "pareto-core-state": "^0.10.0"
+    "pareto-core": "^0.0.4"
   },
   "foo": "bar",
   "files": [
@@ -26,6 +25,6 @@
   },
   "types": "dist/index.d.ts",
   "version": "0.1.0",
-  "interface-fingerprint": "e3ecfb78ea7822c002aab0d32f6eb58bdc0296d3",
-  "content-fingerprint": "80360a0e09e442f06d92aac7263c9fd87f5caa75"
+  "interface-fingerprint": "5b3a108a9201df8d6307fce1fd7fe227df4f9970",
+  "content-fingerprint": "309fd36704e106d119fc2b84ee2dc1f7e518d870"
 }
