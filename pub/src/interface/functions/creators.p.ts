@@ -1,5 +1,5 @@
 import * as h from "api-astn-handlers"
-import * as tc from "api-astn-tokenconsumer"
+import * as tc from "glo-astn-tokenconsumer"
 import { IHeaderHandler } from "../interfaces/IHeaderHandler.p"
 
 import { THeaderError } from "../types/HeaderError.p"

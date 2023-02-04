@@ -1,44 +1,45 @@
 import * as pl from "pareto-core-lib"
 
-import * as api from "../../interface"
+import * as api from "../api"
 
-export function createTreeParserErrorMessage(error: api.TTreeParserError): string {
-    switch (error[0]) {
+export const $$: api.CcreateTreeParserErrorMessage = ($) => {
+    switch ($[0]) {
         case "missing array close": {
-            return error[0]
+            return $[0]
         }
         case "missing object close": {
-            return error[0]
+            return $[0]
         }
         case "missing key": {
-            return error[0]
+            return $[0]
         }
         case "missing option": {
-            return error[0]
+            return $[0]
         }
         case "missing value": {
-            return error[0]
+            return $[0]
         }
         case "missing tagged union option and value": {
-            return error[0]
+            return $[0]
         }
         case "unexpected data after end": {
-            return error[0]
+            return $[0]
         }
         case "unexpected end of array": {
-            return error[0]
+            return $[0]
         }
         case "unexpected header start": {
-            return error[0]
+            return $[0]
         }
         case "unexpected end of text": {
-            const $ = error[1]
-            return `unexpected end of text, still in ${$["still in"][0]}`
+            return pl.cc($[1], ($) => {
+                return `unexpected end of text, still in ${$["still in"][0]}`
+            })
         }
         case "unexpected end of object": {
-            return error[0]
+            return $[0]
         }
         default:
-            return pl.au(error[0])
+            return pl.au($[0])
     }
 }

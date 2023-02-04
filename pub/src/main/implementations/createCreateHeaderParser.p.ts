@@ -1,10 +1,10 @@
 import * as pl from "pareto-core-lib"
 
-import * as tc from "api-astn-tokenconsumer"
+import * as tc from "glo-astn-tokenconsumer"
 
 import * as api from "../../interface"
 
-export function createCreateHeaderParser<PAnnotation>(
+export function $$<PAnnotation>(
     $x: {
         onError: ($: {
             error: api.THeaderError

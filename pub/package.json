@@ -1,33 +1,21 @@
 {
   "author": "Corno",
+  "license": "ISC",
+  "description": "functions that can be used by an IDE to support ASTN",
+
   "dependencies": {
-    "api-astn-handlers": "^0.3.0",
-    "api-astn-tokenconsumer": "^0.4.0",
-    "pareto-core": "^0.0.5",
-    "pareto-core-lib": "^0.17.0",
-    "pareto-core-raw": "^0.7.0",
+    "glo-astn-tokenconsumer": "^0.2.0",
+    "glo-pareto-common": "^0.11.0",
+    "pareto-core-lib": "^0.18.0",
+    "pareto-core-raw": "^0.7.4",
     "pareto-core-state": "^0.12.0"
   },
-  "foo": "bar",
   "files": [
-    "dist",
-    "data"
+    "dist"
   ],
-  "keywords": [],
-  "main": "./dist/index.js",
-  "bugs": {
-    "url": "https://github.com/corno/astn/issues"
-  },
-  "description": "parser for ASTN",
-  "homepage": "https://github.com/corno/astn#readme",
-  "license": "ISC",
-  "name": "lib-astn-parser",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/corno/lib-astn-parser.git"
+    "type": "git"
   },
-  "types": "dist/index.d.ts",
-  "version": "0.1.0",
-  "interface-fingerprint": "721dfaf7346868c65be4e8946e3b9f8b1f353b8a",
-  "content-fingerprint": "57b9de2ecc4a4a5db614d5bcf059aa0e09a6d0dd"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

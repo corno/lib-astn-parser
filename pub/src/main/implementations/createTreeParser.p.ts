@@ -5,7 +5,7 @@ import * as h from "api-astn-handlers"
 import * as papi from "api-astn-tokenconsumer"
 import * as api from "../../interface"
 
-export const createCreateTreeParser: api.FCreateCreateTreeParser = ($x) => {
+export const $$: api.FCreateCreateTreeParser = ($x) => {
 
     function x<PAnnotation>($x: {
         readonly "onError": ($: {

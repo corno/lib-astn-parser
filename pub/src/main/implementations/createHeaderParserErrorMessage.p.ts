@@ -1,9 +1,9 @@
 import * as pl from "pareto-core-lib"
 
-import * as api from "../../interface"
+import * as api from "../api"
 
-export function createHeaderErrorMessage($$: api.THeaderError): string {
-    switch ($$[0]) {
+export const $$: api.CcreateHeaderParserErrorMessage = ($) => {
+    switch ($[0]) {
         case "expected an embedded schema": {
             return `expected an embedded schema`
         }
@@ -17,6 +17,6 @@ export function createHeaderErrorMessage($$: api.THeaderError): string {
             return `expected a schema reference or an embedded schema`
         }
         default:
-            return pl.au($$[0])
+            return pl.au($[0])
     }
 }
