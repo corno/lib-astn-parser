@@ -8,7 +8,7 @@ import { $ as api } from "./api.data"
 
 export const $: mproject.TProject = {
     'author': "Corno",
-    'description': "functions that can be used by an IDE to support ASTN",
+    'description': "the ASTN parser",
     'license': "ISC",
 
     'pubdependencies': d({
@@ -21,6 +21,7 @@ export const $: mproject.TProject = {
         },
         'submodules': d({
         }),
+        'executables': d({}),
         'test': {
             'dependencies': d({
             }),
