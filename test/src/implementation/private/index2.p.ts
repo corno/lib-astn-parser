@@ -1,5 +1,5 @@
-// import * as pl from "pareto-core-lib"
-// import * as pb from "pareto-core-exe"
+// import * as pl from 'pareto-core-lib'
+// import * as pb from 'pareto-core-exe'
 // import * as pc from "pareto-core-candidates"
 
 // pl.logDebugMessage("no tests yet")

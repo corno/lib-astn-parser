@@ -7,29 +7,28 @@ import {
     reference,
     boolean,
     typeReference,
-    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method
+    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method, type
 } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands.p"
 
 import * as mglossary from "lib-pareto-typescript-project/dist/submodules/glossary"
 
 const d = pr.wrapRawDictionary
 
-export const $: mglossary.TGlossary = {
+export const $: mglossary.T.Glossary<string> = {
     'imports': d({
         "common": "glo-pareto-common",
     }),
     'parameters': d({
         "Annotation": {},
     }),
-    'templates': d({}),
-    'types': types({
-        "HeaderParserError": taggedUnion({
+    'types': d({
+        "HeaderParserError": type( taggedUnion({
             "expected the schema start (!) or root value": group({}),
             "expected an embedded schema": group({}),
             "expected a schema reference or an embedded schema": group({}),
             "expected a schema schema reference": group({}),
-        }),
-        "TreeParserError": taggedUnion({
+        })),
+        "TreeParserError": type( taggedUnion({
 
 
             "missing array close": group({}),
@@ -49,9 +48,7 @@ export const $: mglossary.TGlossary = {
                     "tagged union": group({}),
                 }))
             }),
-        })
-
-
+        })),
     }),
     'interfaces': d({
     }),

@@ -2,8 +2,8 @@
 //     no-console:"off",
 //     complexity: "off",
 // */
-// import * as pl from "pareto-core-lib"
-// import * as pt from "pareto-core-types"
+// import * as pl from 'pareto-core-lib'
+// import * as pt from 'pareto-core-types'
 // import * as pc from "pareto-core-candidates"
 // import * as h from "astn-handlers-api"
 

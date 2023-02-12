@@ -1,15 +1,11 @@
 import * as pt from 'pareto-core-types'
 
-import * as t from './types.generated'
+import { T   } from './types.generated'
 
 import * as mcommon from "glo-pareto-common"
 
-export type THeaderParserError = t.UHeaderParserError
+export type FCreateHeaderParserErrorMessage = <GPAnnotation>($: T.HeaderParserError<GPAnnotation>,) => mcommon.T.String
 
-export type TTreeParserError = t.UTreeParserError
+export type FCreateTreeParserErrorMessage = <GPAnnotation>($: T.TreeParserError<GPAnnotation>,) => mcommon.T.String
 
-export type FCreateHeaderParserErrorMessage = ($: THeaderParserError,) => mcommon.TString
-
-export type FCreateTreeParserErrorMessage = ($: TTreeParserError,) => mcommon.TString
-
-export type FX = ($: mcommon.TNull,) => void
+export type FX = <GPAnnotation>($: mcommon.T.Null,) => void
