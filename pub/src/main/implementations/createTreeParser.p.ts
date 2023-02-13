@@ -6,24 +6,24 @@ import * as api from "../api"
 import * as mh from "glo-astn-handlers"
 import * as mtc from "glo-astn-tokenconsumer"
 
-export const $$: api.CcreateCreateHeaderParser = ($x) => {
+export const $$: api.CcreateTreeParser = ($d: {}) => {
 
-    return ($i) => {
+    return <PAnnotation>($: null, $i: api.ITreeParserHandler<PAnnotation>) => {
 
         function createTreeParser(
         ): mtc.ITokenConsumer<PAnnotation> {
 
             type ObjectContext = {
                 type:
-                | ["dictionary", null]
-                | ["verbose group", null]
+                | ['dictionary', null]
+                | ['verbose group', null]
                 readonly objectHandler: mh.IObjectHandler<PAnnotation>
             }
 
             type ArrayContext = {
                 type:
-                | ["list", null]
-                | ["shorthand group", null]
+                | ['list', null]
+                | ['shorthand group', null]
                 foundElements: boolean
                 readonly arrayHandler: mh.IArrayHandler<PAnnotation>
             }
@@ -37,10 +37,10 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
             }
 
             type ContextType =
-                | ["expecting value", ExpectingValue]
-                | ["processing object", ObjectContext]
-                | ["processing array", ArrayContext]
-                | ["processing taggedunion", TaggedUnionContext]
+                | ['expecting value', ExpectingValue]
+                | ['processing object', ObjectContext]
+                | ['processing array', ArrayContext]
+                | ['processing taggedunion', TaggedUnionContext]
 
             type Processing = {
                 currentContext: ContextType
@@ -48,11 +48,11 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
             }
 
             type State2 =
-                | ["processing", Processing]
-                | ["done", null]
+                | ['processing', Processing]
+                | ['done', null]
 
-            let state2: State2 = ["processing", {
-                currentContext: ["expecting value", {
+            let state2: State2 = ['processing', {
+                currentContext: ['expecting value', {
                     handler: $i.handler.root
                 }],
                 stack: pm.createStack(pl.createEmptyArray()),
@@ -61,8 +61,8 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
 
             return {
                 onToken: (token) => {
-                    function raiseError(error: api.TTreeParserError) {
-                        $x.onError({
+                    function raiseError(error: api.T.TreeParserError<PAnnotation>) {
+                        $i.onError({
                             error: error,
                             annotation: token.annotation,
                         })
@@ -70,7 +70,7 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                     function handleToken() {
 
                         switch (state2[0]) {
-                            case "processing":
+                            case 'processing':
                                 pl.cc(state2[1], ($) => {
                                     const processing = $
 
@@ -81,22 +81,22 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                 const previousContext = $
                                                 processing.currentContext = previousContext
                                                 switch (previousContext[0]) {
-                                                    case "expecting value":
+                                                    case 'expecting value':
                                                         pl.cc(previousContext[1], ($) => {
                                                             pop()
                                                         })
                                                         break
-                                                    case "processing array":
+                                                    case 'processing array':
                                                         pl.cc(previousContext[1], ($) => {
                                                         })
                                                         break
-                                                    case "processing object":
+                                                    case 'processing object':
                                                         pl.cc(previousContext[1], ($) => {
                                                         })
                                                         break
-                                                    case "processing taggedunion":
+                                                    case 'processing taggedunion':
                                                         pl.cc(previousContext[1], ($) => {
-                                                            $.handler.end({})
+                                                            $.handler.onEnd()
                                                             pop()
                                                         })
                                                         break
@@ -106,7 +106,7 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                             () => {
 
                                                 $i.handler.onEnd()
-                                                state2 = ["done", null]
+                                                state2 = ['done', null]
                                             }
                                         )
                                     }
@@ -120,38 +120,36 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                         onValue: () => mh.IValueHandler<PAnnotation>,
                                         onNonValue: (
                                             token:
-                                                | ["close object", null]
-                                                | ["close array", null]
+                                                | ['close object', null]
+                                                | ['close array', null]
                                         ) => void,
                                         onTerminal: () => void,
                                     ) {
                                         switch (token.token[0]) {
-                                            case "header start": {
-                                                raiseError(["unexpected header start", null])
+                                            case 'header start': {
+                                                raiseError(['unexpected header start', {}])
                                                 break
                                             }
-                                            case "structural": {
+                                            case 'structural': {
 
                                                 const punctuation = token.token[1]
                                                 switch (punctuation.type[0]) {
-                                                    case "close shorthand group":
-                                                        onNonValue(["close array", null])
+                                                    case 'close shorthand group':
+                                                        onNonValue(['close array', null])
                                                         break
-                                                    case "close list":
-                                                        onNonValue(["close array", null])
+                                                    case 'close list':
+                                                        onNonValue(['close array', null])
                                                         break
-                                                    case "open shorthand group":
+                                                    case 'open shorthand group':
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
-                                                                ["processing array", {
+                                                                ['processing array', {
                                                                     foundElements: false,
-                                                                    type: ["shorthand group", null],
+                                                                    type: ['shorthand group', null],
                                                                     arrayHandler: onValue().array({
+                                                                        annotation: token.annotation,
                                                                         token: {
-                                                                            annotation: token.annotation,
-                                                                            token: {
-                                                                                type: ["shorthand group", null]
-                                                                            }
+                                                                            type: ['shorthand group', {}]
                                                                         }
 
                                                                     }),
@@ -159,42 +157,37 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                             )
                                                         })
                                                         break
-                                                    case "open list":
+                                                    case 'open list':
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
-                                                                ["processing array", {
+                                                                ['processing array', {
                                                                     foundElements: false,
-                                                                    type: ["list", null],
+                                                                    type: ['list', null],
                                                                     arrayHandler: onValue().array({
+                                                                        annotation: token.annotation,
                                                                         token: {
-                                                                            annotation: token.annotation,
-                                                                            token: {
-                                                                                type: ["list", null]
-                                                                            }
+                                                                            type: ['list', {}]
                                                                         }
-
                                                                     }),
                                                                 }]
                                                             )
                                                         })
                                                         break
-                                                    case "close dictionary":
-                                                        onNonValue(["close object", null])
+                                                    case 'close dictionary':
+                                                        onNonValue(['close object', null])
                                                         break
-                                                    case "close verbose group":
-                                                        onNonValue(["close object", null])
+                                                    case 'close verbose group':
+                                                        onNonValue(['close object', null])
                                                         break
-                                                    case "open dictionary":
+                                                    case 'open dictionary':
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
-                                                                ["processing object", {
-                                                                    type: ["dictionary", null],
+                                                                ['processing object', {
+                                                                    type: ['dictionary', null],
                                                                     objectHandler: onValue().object({
+                                                                        annotation: token.annotation,
                                                                         token: {
-                                                                            annotation: token.annotation,
-                                                                            token: {
-                                                                                type: ["dictionary", null]
-                                                                            }
+                                                                            type: ['dictionary', {}]
                                                                         }
                                                                     }),
                                                                 }]
@@ -202,33 +195,28 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
 
                                                         })
                                                         break
-                                                    case "open verbose group":
+                                                    case 'open verbose group':
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
-                                                                ["processing object", {
-                                                                    type: ["verbose group", null],
+                                                                ['processing object', {
+                                                                    type: ['verbose group', null],
                                                                     objectHandler: onValue().object({
+                                                                        annotation: token.annotation,
                                                                         token: {
-                                                                            annotation: token.annotation,
-                                                                            token: {
-                                                                                type: ["verbose group", null]
-                                                                            }
+                                                                            type: ['verbose group', {}]
                                                                         }
                                                                     }),
                                                                 }]
                                                             )
                                                         })
                                                         break
-                                                    case "tagged union start":
+                                                    case 'tagged union start':
                                                         pl.cc(punctuation.type[1], ($) => {
                                                             push(
-                                                                ["processing taggedunion", {
+                                                                ['processing taggedunion', {
                                                                     handler: onValue().taggedUnion({
-                                                                        token: {
                                                                             annotation: token.annotation,
-                                                                            token: null
-                                                                        }
-
+                                                                            token: {}
                                                                     })
                                                                 }]
                                                             )
@@ -240,28 +228,22 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                 }
                                                 break
                                             }
-                                            case "simple string": {
+                                            case 'simple string': {
                                                 pl.cc(token.token[1], ($) => {
                                                     onValue().simpleString({
-                                                        token: {
-                                                            annotation: token.annotation,
-                                                            token: $
-                                                        }
-
+                                                        annotation: token.annotation,
+                                                        token: $,
                                                     })
                                                     onTerminal()
                                                 })
 
                                                 break
                                             }
-                                            case "multiline string": {
+                                            case 'multiline string': {
                                                 pl.cc(token.token[1], ($) => {
                                                     onValue().multilineString({
-                                                        token: {
-                                                            annotation: token.annotation,
-                                                            token: $
-                                                        }
-
+                                                        annotation: token.annotation,
+                                                        token: $,
                                                     })
                                                     onTerminal()
                                                 })
@@ -272,15 +254,13 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                         }
                                     }
                                     switch ($.currentContext[0]) {
-                                        case "expecting value":
+                                        case 'expecting value':
                                             pl.cc($.currentContext[1], ($) => {
                                                 testForValue(
                                                     () => $.handler.exists,
                                                     ($$) => {
-                                                        raiseError(["missing value", null])
-                                                        $.handler.missing({
-                                                            annotation: token.annotation
-                                                        })
+                                                        raiseError(['missing value', {}])
+                                                        $.handler.missing(token.annotation)
                                                         pop()
                                                         handleToken()
                                                     },
@@ -290,27 +270,23 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                 )
                                             })
                                             break
-                                        case "processing array":
+                                        case 'processing array':
                                             pl.cc($.currentContext[1], ($) => {
                                                 const arrayContext = $
                                                 testForValue(
-                                                    () => $.arrayHandler.element({
-                                                        annotation: token.annotation
-                                                    }),
+                                                    () => $.arrayHandler.element(token.annotation),
                                                     ($) => {
                                                         switch ($[0]) {
-                                                            case "close object":
+                                                            case 'close object':
                                                                 pl.cc($[1], ($) => {
-                                                                    raiseError(["unexpected end of object", null])
+                                                                    raiseError(['unexpected end of object', {}])
                                                                 })
                                                                 break
-                                                            case "close array":
+                                                            case 'close array':
                                                                 pl.cc($[1], ($) => {
                                                                     arrayContext.arrayHandler.onEnd({
-                                                                        token: {
-                                                                            annotation: token.annotation,
-                                                                            token: null,
-                                                                        }
+                                                                        annotation: token.annotation,
+                                                                        token: {},
                                                                     })
                                                                     pop()
                                                                 })
@@ -324,39 +300,33 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                 )
                                             })
                                             break
-                                        case "processing object":
+                                        case 'processing object':
                                             pl.cc($.currentContext[1], ($) => {
                                                 const objectContext = $
-                                                if (token.token[0] === "simple string") {
+                                                if (token.token[0] === 'simple string') {
                                                     push(
-                                                        ["expecting value", {
+                                                        ['expecting value', {
                                                             handler: objectContext.objectHandler.property({
-                                                                token: {
-                                                                    annotation: token.annotation,
-                                                                    token: token.token[1]
-                                                                }
+                                                                annotation: token.annotation,
+                                                                token: token.token[1]
                                                             })
                                                         }]
                                                     )
                                                 } else {
                                                     testForValue(
                                                         () => {
-                                                            raiseError(["missing key", null])
-                                                            return objectContext.objectHandler.anonymousProperty({
-                                                                annotation: token.annotation
-                                                            })
+                                                            raiseError(['missing key', {}])
+                                                            return objectContext.objectHandler.anonymousProperty(token.annotation)
                                                         },
                                                         ($) => {
-                                                            if ($[0] === "close object") {
+                                                            if ($[0] === 'close object') {
                                                                 objectContext.objectHandler.onEnd({
-                                                                    token: {
-                                                                        annotation: token.annotation,
-                                                                        token: null
-                                                                    }
+                                                                    annotation: token.annotation,
+                                                                    token: {},
                                                                 })
                                                                 pop()
                                                             } else {
-                                                                raiseError(["missing object close", null])
+                                                                raiseError(['missing object close', {}])
 
                                                                 pop()
                                                                 handleToken()
@@ -369,17 +339,15 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                 }
                                             })
                                             break
-                                        case "processing taggedunion":
+                                        case 'processing taggedunion':
                                             pl.cc($.currentContext[1], ($) => {
                                                 const tuh = $
-                                                if (token.token[0] === "simple string") {
+                                                if (token.token[0] === 'simple string') {
                                                     push(
-                                                        ["expecting value", {
+                                                        ['expecting value', {
                                                             handler: tuh.handler.option({
-                                                                token: {
-                                                                    annotation: token.annotation,
-                                                                    token: token.token[1]
-                                                                }
+                                                                annotation: token.annotation,
+                                                                token: token.token[1]
                                                             })
                                                         }]
                                                     )
@@ -387,13 +355,11 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                                     //we have an error
                                                     testForValue(
                                                         () => {
-                                                            raiseError(["missing option", null])
-                                                            return tuh.handler.missingOption({
-                                                                annotation: token.annotation
-                                                            }).exists
+                                                            raiseError(['missing option', {}])
+                                                            return tuh.handler.missingOption(token.annotation).exists
                                                         },
                                                         () => {
-                                                            raiseError(["missing tagged union option and value", null])
+                                                            raiseError(['missing tagged union option and value', {}])
                                                             pop()
                                                             handleToken()
                                                         },
@@ -408,9 +374,9 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                     }
                                 })
                                 break
-                            case "done":
+                            case 'done':
                                 pl.cc(state2[1], ($) => {
-                                    raiseError(["unexpected data after end", null])
+                                    raiseError(['unexpected data after end', {}])
                                 })
                                 break
                             default: pl.au(state2[0])
@@ -419,42 +385,38 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                     handleToken()
                 },
                 onEnd: (endAnnotation) => {
-                    function raiseError(error: api.TTreeParserError) {
-                        $x.onError({
+                    function raiseError(error: api.T.TreeParserError<PAnnotation>) {
+                        $i.onError({
                             error: error,
                             annotation: endAnnotation,
                         })
                     }
                     switch (state2[0]) {
-                        case "processing":
+                        case 'processing':
                             pl.cc(state2[1], ($) => {
                                 const state = $
                                 switch (state.currentContext[0]) {
-                                    case "expecting value": {
-                                        raiseError(["missing value", null])
-                                        state.currentContext[1].handler.missing({
-                                            annotation: endAnnotation
-                                        })
+                                    case 'expecting value': {
+                                        raiseError(['missing value', {}])
+                                        state.currentContext[1].handler.missing(endAnnotation)
 
                                         break
                                     }
-                                    case "processing array": {
+                                    case 'processing array': {
                                         const $ = state.currentContext[1]
-                                        raiseError(["unexpected end of text", { "still in": ["array", null] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['array', {}] }])
                                         break
                                     }
-                                    case "processing object": {
+                                    case 'processing object': {
                                         const $ = state.currentContext[1]
-                                        raiseError(["unexpected end of text", { "still in": ["object", null] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['object', {}] }])
                                         break
                                     }
-                                    case "processing taggedunion": {
+                                    case 'processing taggedunion': {
                                         const $ = state.currentContext[1]
-                                        $.handler.missingOption({
-                                            annotation: endAnnotation
-                                        })
+                                        $.handler.missingOption(endAnnotation)
 
-                                        raiseError(["unexpected end of text", { "still in": ["tagged union", null] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['tagged union', {}] }])
 
                                         break
                                     }
@@ -463,7 +425,7 @@ export const $$: api.CcreateCreateHeaderParser = ($x) => {
                                 }
                             })
                             break
-                        case "done":
+                        case 'done':
                             pl.cc(state2[1], ($) => {
                             })
                             break

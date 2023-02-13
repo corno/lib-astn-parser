@@ -1,11 +1,51 @@
 import * as pt from 'pareto-core-types'
 
 import * as mcommon from "glo-pareto-common"
+import * as mh from "glo-astn-handlers"
 import * as mtc from "glo-astn-tokenconsumer"
 
 export namespace T {
     
+    export namespace AnnotatedHeaderParserError {
+        
+        export type annotation<GPAnnotation> = GPAnnotation
+        
+        export type error<GPAnnotation> = T.HeaderParserError<GPAnnotation>
+    }
+    
+    export type AnnotatedHeaderParserError<GPAnnotation> = {
+        readonly 'annotation': GPAnnotation
+        readonly 'error': T.HeaderParserError<GPAnnotation>
+    }
+    
+    export namespace AnnotatedTreeParserError {
+        
+        export type annotation<GPAnnotation> = GPAnnotation
+        
+        export type error<GPAnnotation> = T.TreeParserError<GPAnnotation>
+    }
+    
+    export type AnnotatedTreeParserError<GPAnnotation> = {
+        readonly 'annotation': GPAnnotation
+        readonly 'error': T.TreeParserError<GPAnnotation>
+    }
+    
     export type Annotation<GPAnnotation> = GPAnnotation
+    
+    export namespace EmbeddedSchema {
+        
+        export type embeddedSchemaAnnotation<GPAnnotation> = GPAnnotation
+        
+        export type headerAnnotation<GPAnnotation> = GPAnnotation
+        
+        export type schemaSchemaReferenceToken<GPAnnotation> = mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+    }
+    
+    export type EmbeddedSchema<GPAnnotation> = {
+        readonly 'embeddedSchemaAnnotation': GPAnnotation
+        readonly 'headerAnnotation': GPAnnotation
+        readonly 'schemaSchemaReferenceToken': mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+    }
     
     export namespace HeaderParserError {
         
@@ -31,6 +71,18 @@ export namespace T {
         | ['expected a schema schema reference', {}]
         | ['expected an embedded schema', {}]
         | ['expected the schema start (!) or root value', {}]
+    
+    export namespace SchemaReference {
+        
+        export type headerAnnotation<GPAnnotation> = GPAnnotation
+        
+        export type token<GPAnnotation> = mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+    }
+    
+    export type SchemaReference<GPAnnotation> = {
+        readonly 'headerAnnotation': GPAnnotation
+        readonly 'token': mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+    }
     
     export namespace TreeParserError {
         

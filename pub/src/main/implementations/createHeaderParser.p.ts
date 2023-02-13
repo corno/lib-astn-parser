@@ -4,22 +4,15 @@ import * as tc from "glo-astn-tokenconsumer"
 
 import * as api from "../api"
 
-// export function $$<PAnnotation>(
-//     $x: {
-//         onError: ($: {
-//             error: api.T.HeaderError
-//             annotation: PAnnotation
-//         }) => void
-//     }
-// ): api.FCreateHeaderParser<PAnnotation> {
-
-
+// function x<T>($: api.FCreateHeaderParser): api.FCreateHeaderParser {
+//     return $
+// } 
 
 export const $$: api.CcreateHeaderParser = ($d) => {
-    return ($) => {
+    function x <PAnnotation>($: null, $i: api.IHeaderParserHandler<PAnnotation>): tc.ITokenConsumer<PAnnotation> {
         type RootContext = {
             state:
-            | ['expecting header or body', null]
+            | ['expecting header or body', {}]
             | ['expecting schema reference or embedded schema', {
                 headerAnnotation: PAnnotation
             }]
@@ -32,12 +25,12 @@ export const $$: api.CcreateHeaderParser = ($d) => {
             }]
         }
 
-        const rootContext: RootContext = { state: ['expecting header or body', null] }
+        const rootContext: RootContext = { state: ['expecting header or body', {}] }
 
         return {
             onEnd: (annotation) => {
-                function raiseError(error: api.T.HeaderError) {
-                    $x.onError({
+                function raiseError(error: api.T.HeaderParserError<PAnnotation>) {
+                    $i.onError({
                         error: error,
                         annotation: annotation,
                     })
@@ -45,15 +38,15 @@ export const $$: api.CcreateHeaderParser = ($d) => {
                 switch (rootContext.state[0]) {
                     case 'expecting header or body': {
                         //const $ = rootContext.state[1]
-                        raiseError(['expected the schema start (!) or root value', null])
+                        raiseError(['expected the schema start (!) or root value', {}])
                         break
                     }
                     case 'expecting schema reference or embedded schema': {
-                        raiseError(['expected a schema reference or an embedded schema', null])
+                        raiseError(['expected a schema reference or an embedded schema', {}])
                         break
                     }
                     case 'expecting schema schema reference': {
-                        raiseError(['expected a schema schema reference', null])
+                        raiseError(['expected a schema schema reference', {}])
                         break
                     }
                     case 'header is parsed': {
@@ -67,8 +60,8 @@ export const $$: api.CcreateHeaderParser = ($d) => {
             },
             onToken: ($) => {
                 const data = $
-                function raiseError(error: api.THeaderError) {
-                    $x.onError({
+                function raiseError(error: api.T.HeaderParserError<PAnnotation>) {
+                    $i.onError({
                         error: error,
                         annotation: $.annotation,
                     })
@@ -82,7 +75,7 @@ export const $$: api.CcreateHeaderParser = ($d) => {
                             }]
                         } else {
 
-                            const bp = $y.handler.onNoInternalSchema()
+                            const bp = $i.handler.onNoInternalSchema(null)
                             rootContext.state = ['header is parsed', {
                                 parser: bp,
                             }]
@@ -103,13 +96,13 @@ export const $$: api.CcreateHeaderParser = ($d) => {
 
                             case 'structural': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(['expected a schema reference or an embedded schema', null])
+                                    raiseError(['expected a schema reference or an embedded schema', {}])
                                 })
                                 break
                             }
                             case 'simple string': {
                                 pl.cc($.token[1], ($) => {
-                                    const bp = $y.handler.onSchemaReference({
+                                    const bp = $i.handler.onSchemaReference({
                                         headerAnnotation: headerAnnotation,
                                         token: {
                                             token: $,
@@ -124,7 +117,7 @@ export const $$: api.CcreateHeaderParser = ($d) => {
                             }
                             case 'multiline string': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(['expected an embedded schema', null])
+                                    raiseError(['expected an embedded schema', {}])
                                 })
                                 break
                             }
@@ -139,9 +132,9 @@ export const $$: api.CcreateHeaderParser = ($d) => {
                         const headerAnnotation = rootContext.state[1].headerAnnotation
                         const embeddedSchemaAnnotation = rootContext.state[1].embeddedSchemaAnnotation
                         if ($.token[0] !== 'simple string') {
-                            raiseError(['expected a schema schema reference', null])
+                            raiseError(['expected a schema schema reference', {}])
                         } else {
-                            const x = $y.handler.onEmbeddedSchema({
+                            const x = $i.handler.onEmbeddedSchema({
                                 headerAnnotation: headerAnnotation,
                                 embeddedSchemaAnnotation: embeddedSchemaAnnotation,
                                 schemaSchemaReferenceToken: {
@@ -207,4 +200,5 @@ export const $$: api.CcreateHeaderParser = ($d) => {
             },
         }
     }
+    return x
 }
