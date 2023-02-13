@@ -1,4 +1,4 @@
-import * as h from "api-astn-handlers"
+import * as h from "glo-astn-handlers"
 import * as tc from "glo-astn-tokenconsumer"
 import { IHeaderHandler } from "../interfaces/IHeaderHandler.p"
 

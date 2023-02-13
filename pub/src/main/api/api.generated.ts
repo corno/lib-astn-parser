@@ -4,16 +4,16 @@ import * as glo from "./glossary"
 
 import * as mcommon from "glo-pareto-common"
 
-export type CcreateCreateHeaderParser = glo.FX
+export type CcreateHeaderParser = ($d: {}) => glo.FCreateHeaderParser
 
 export type CcreateHeaderParserErrorMessage = glo.FCreateHeaderParserErrorMessage
 
-export type CcreateTreeParser = glo.FX
+export type CcreateTreeParser = ($d: {}) => glo.FCreateTreeParser
 
 export type CcreateTreeParserErrorMessage = glo.FCreateTreeParserErrorMessage
 
 export type API = {
-    createCreateHeaderParser: CcreateCreateHeaderParser
+    createHeaderParser: CcreateHeaderParser
     createHeaderParserErrorMessage: CcreateHeaderParserErrorMessage
     createTreeParser: CcreateTreeParser
     createTreeParserErrorMessage: CcreateTreeParserErrorMessage

@@ -4,6 +4,7 @@
   "description": "the ASTN parser",
 
   "dependencies": {
+    "glo-astn-handlers": "^0.0.0",
     "glo-astn-tokenconsumer": "^0.0.0",
     "glo-pareto-common": "^0.0.0",
     "pareto-core-lib": "^0.0.0",

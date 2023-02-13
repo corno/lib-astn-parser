@@ -14,6 +14,7 @@ export const $: mproject.T.Project = {
     'pubdependencies': d({
         "glo-pareto-common": {},
         "glo-astn-tokenconsumer": {},
+        "glo-astn-handlers": {},
     }),
     'type': ['library', {
         'main': {

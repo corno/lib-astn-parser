@@ -7,7 +7,7 @@ import {
     reference,
     boolean,
     typeReference,
-    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method, type
+    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method, type, context, glossaryParameter
 } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands.p"
 
 import * as mglossary from "lib-pareto-typescript-project/dist/submodules/glossary"
@@ -17,20 +17,20 @@ const d = pr.wrapRawDictionary
 export const $: mglossary.T.Glossary<string> = {
     'imports': d({
         "common": "glo-pareto-common",
+        "tc": "glo-astn-tokenconsumer",
     }),
     'parameters': d({
         "Annotation": {},
     }),
     'types': d({
-        "HeaderParserError": type( taggedUnion({
+        "Annotation": type(glossaryParameter("Annotation")),
+        "HeaderParserError": type(taggedUnion({
             "expected the schema start (!) or root value": group({}),
             "expected an embedded schema": group({}),
             "expected a schema reference or an embedded schema": group({}),
             "expected a schema schema reference": group({}),
         })),
-        "TreeParserError": type( taggedUnion({
-
-
+        "TreeParserError": type(taggedUnion({
             "missing array close": group({}),
             "missing key": group({}),
             "missing object close": group({}),
@@ -53,7 +53,11 @@ export const $: mglossary.T.Glossary<string> = {
     'interfaces': d({
     }),
     'functions': d({
-        "X": func(typeReference("common", "Null"), null, null, null),
+        "CreateHeaderParser": func(typeReference("common", "Null"), null, null, inf({
+            'context': context("tc", { "Annotation": typeReference("Annotation") }),
+            'interface': "TokenConsumer"
+        })),
+        "CreateTreeParser": func(typeReference("common", "Null"), null, null, null),
         "CreateHeaderParserErrorMessage": func(typeReference("HeaderParserError"), null, null, data(typeReference("common", "String"), false)),
         "CreateTreeParserErrorMessage": func(typeReference("TreeParserError"), null, null, data(typeReference("common", "String"), false)),
     }),

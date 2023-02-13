@@ -1,8 +1,11 @@
 import * as pt from 'pareto-core-types'
 
 import * as mcommon from "glo-pareto-common"
+import * as mtc from "glo-astn-tokenconsumer"
 
 export namespace T {
+    
+    export type Annotation<GPAnnotation> = GPAnnotation
     
     export namespace HeaderParserError {
         
@@ -75,9 +78,9 @@ export namespace T {
                 
                 export type array<GPAnnotation> = {}
                 
-                export namespace object {}
+                export namespace _lobject {}
                 
-                export type object<GPAnnotation> = {}
+                export type _lobject<GPAnnotation> = {}
                 
                 export namespace tagged__union {}
                 

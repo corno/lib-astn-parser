@@ -2,57 +2,61 @@ import * as pl from 'pareto-core-lib'
 
 import * as tc from "glo-astn-tokenconsumer"
 
-import * as api from "../../interface"
+import * as api from "../api"
 
-export function $$<PAnnotation>(
-    $x: {
-        onError: ($: {
-            error: api.THeaderError
-            annotation: PAnnotation
-        }) => void
-    }
-): api.FCreateHeaderParser<PAnnotation> {
-    return ($y) => {
+// export function $$<PAnnotation>(
+//     $x: {
+//         onError: ($: {
+//             error: api.T.HeaderError
+//             annotation: PAnnotation
+//         }) => void
+//     }
+// ): api.FCreateHeaderParser<PAnnotation> {
+
+
+
+export const $$: api.CcreateHeaderParser = ($d) => {
+    return ($) => {
         type RootContext = {
             state:
-            | ["expecting header or body", null]
-            | ["expecting schema reference or embedded schema", {
+            | ['expecting header or body', null]
+            | ['expecting schema reference or embedded schema', {
                 headerAnnotation: PAnnotation
             }]
-            | ["expecting schema schema reference", {
+            | ['expecting schema schema reference', {
                 headerAnnotation: PAnnotation
                 embeddedSchemaAnnotation: PAnnotation
             }]
-            | ["header is parsed", {
+            | ['header is parsed', {
                 parser: tc.ITokenConsumer<PAnnotation>
             }]
         }
 
-        const rootContext: RootContext = { state: ["expecting header or body", null] }
+        const rootContext: RootContext = { state: ['expecting header or body', null] }
 
         return {
             onEnd: (annotation) => {
-                function raiseError(error: api.THeaderError) {
+                function raiseError(error: api.T.HeaderError) {
                     $x.onError({
                         error: error,
                         annotation: annotation,
                     })
                 }
                 switch (rootContext.state[0]) {
-                    case "expecting header or body": {
+                    case 'expecting header or body': {
                         //const $ = rootContext.state[1]
-                        raiseError(["expected the schema start (!) or root value", null])
+                        raiseError(['expected the schema start (!) or root value', null])
                         break
                     }
-                    case "expecting schema reference or embedded schema": {
-                        raiseError(["expected a schema reference or an embedded schema", null])
+                    case 'expecting schema reference or embedded schema': {
+                        raiseError(['expected a schema reference or an embedded schema', null])
                         break
                     }
-                    case "expecting schema schema reference": {
-                        raiseError(["expected a schema schema reference", null])
+                    case 'expecting schema schema reference': {
+                        raiseError(['expected a schema schema reference', null])
                         break
                     }
-                    case "header is parsed": {
+                    case 'header is parsed': {
                         const $$ = rootContext.state[1]
                         $$.parser.onEnd(annotation)
                         break
@@ -70,40 +74,40 @@ export function $$<PAnnotation>(
                     })
                 }
                 switch (rootContext.state[0]) {
-                    case "expecting header or body": {
-                        if ($.token[0] === "header start") {
+                    case 'expecting header or body': {
+                        if ($.token[0] === 'header start') {
 
-                            rootContext.state = ["expecting schema reference or embedded schema", {
+                            rootContext.state = ['expecting schema reference or embedded schema', {
                                 headerAnnotation: $.annotation,
                             }]
                         } else {
 
                             const bp = $y.handler.onNoInternalSchema()
-                            rootContext.state = ["header is parsed", {
+                            rootContext.state = ['header is parsed', {
                                 parser: bp,
                             }]
                             bp.onToken(data)
                         }
                         break
                     }
-                    case "expecting schema reference or embedded schema": {
+                    case 'expecting schema reference or embedded schema': {
                         const headerAnnotation = rootContext.state[1].headerAnnotation
                         switch ($.token[0]) {
-                            case "header start": {
-                                rootContext.state = ["expecting schema schema reference", {
+                            case 'header start': {
+                                rootContext.state = ['expecting schema schema reference', {
                                     headerAnnotation: headerAnnotation,
                                     embeddedSchemaAnnotation: $.annotation,
                                 }]
                                 break
                             }
 
-                            case "structural": {
+                            case 'structural': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(["expected a schema reference or an embedded schema", null])
+                                    raiseError(['expected a schema reference or an embedded schema', null])
                                 })
                                 break
                             }
-                            case "simple string": {
+                            case 'simple string': {
                                 pl.cc($.token[1], ($) => {
                                     const bp = $y.handler.onSchemaReference({
                                         headerAnnotation: headerAnnotation,
@@ -112,15 +116,15 @@ export function $$<PAnnotation>(
                                             annotation: data.annotation,
                                         },
                                     })
-                                    rootContext.state = ["header is parsed", {
+                                    rootContext.state = ['header is parsed', {
                                         parser: bp,
                                     }]
                                 })
                                 break
                             }
-                            case "multiline string": {
+                            case 'multiline string': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(["expected an embedded schema", null])
+                                    raiseError(['expected an embedded schema', null])
                                 })
                                 break
                             }
@@ -131,11 +135,11 @@ export function $$<PAnnotation>(
                         }
                         break
                     }
-                    case "expecting schema schema reference": {
+                    case 'expecting schema schema reference': {
                         const headerAnnotation = rootContext.state[1].headerAnnotation
                         const embeddedSchemaAnnotation = rootContext.state[1].embeddedSchemaAnnotation
-                        if ($.token[0] !== "simple string") {
-                            raiseError(["expected a schema schema reference", null])
+                        if ($.token[0] !== 'simple string') {
+                            raiseError(['expected a schema schema reference', null])
                         } else {
                             const x = $y.handler.onEmbeddedSchema({
                                 headerAnnotation: headerAnnotation,
@@ -145,13 +149,13 @@ export function $$<PAnnotation>(
                                     annotation: $.annotation,
                                 },
                             })
-                            rootContext.state = ["header is parsed", {
+                            rootContext.state = ['header is parsed', {
                                 parser: x,
                                 // schemaParser: createTreeParser({
                                 //     handler: {
                                 //         onEnd: ($) => {
                                 //             x.onEnd($)
-                                //             rootContext.state = ["processing body", {
+                                //             rootContext.state = ['processing body', {
                                 //                 bodyParser: $p.handler.onBody(),
                                 //             }]
                                 //         },
@@ -163,9 +167,9 @@ export function $$<PAnnotation>(
                         }
                         break
                     }
-                    // case "processing embedded schema": {
+                    // case 'processing embedded schema': {
                     //     const $ = rootContext.state[1]
-                    //     if (data.token[0] !== "content") {
+                    //     if (data.token[0] !== 'content') {
                     //         throw new Error("IMPLEMENT ME")
                     //     }
                     //     $.schemaParser.onToken({
@@ -174,8 +178,8 @@ export function $$<PAnnotation>(
                     //     })
                     //     break
                     // }
-                    // case "processing body": {
-                    //     if (data.token[0] !== "content") {
+                    // case 'processing body': {
+                    //     if (data.token[0] !== 'content') {
                     //         throw new Error("IMPLEMENT ME")
                     //     }
                     //     const $ = rootContext.state[1]
@@ -185,10 +189,10 @@ export function $$<PAnnotation>(
                     //     })
                     //     break
                     // }    
-                    case "header is parsed": {
+                    case 'header is parsed': {
                         const $ = rootContext.state[1]
                         const parser = $.parser
-                        if (data.token[0] === "header start") {
+                        if (data.token[0] === 'header start') {
 
                             pl.panic("UNEXPECTED HEADER (ALREADY PARSED)")
                             //raiseError([""])

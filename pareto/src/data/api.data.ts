@@ -15,9 +15,13 @@ export const $: mmoduleDefinition.T.ModuleDefinition = {
             "common": "glo-pareto-common",
         }),
         'algorithms': d({
-            "createCreateHeaderParser": algorithm(definitionReference("X")),
+            "createHeaderParser": algorithm(definitionReference("CreateHeaderParser"), constructor(null, {
+
+            })),
             "createHeaderParserErrorMessage": algorithm(definitionReference("CreateHeaderParserErrorMessage")),
-            "createTreeParser": algorithm(definitionReference("X")),
+            "createTreeParser": algorithm(definitionReference("CreateTreeParser"), constructor(null, {
+                
+            })),
             "createTreeParserErrorMessage": algorithm(definitionReference("CreateTreeParserErrorMessage")),
         })
     },
