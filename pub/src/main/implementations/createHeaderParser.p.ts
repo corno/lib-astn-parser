@@ -1,15 +1,11 @@
 import * as pl from 'pareto-core-lib'
 
-import * as tc from "glo-astn-tokenconsumer"
-
 import * as api from "../api"
 
-// function x<T>($: api.FCreateHeaderParser): api.FCreateHeaderParser {
-//     return $
-// } 
+import * as mtc from "glo-astn-tokenconsumer"
 
 export const $$: api.CcreateHeaderParser = ($d) => {
-    function x <PAnnotation>($: null, $i: api.IHeaderParserHandler<PAnnotation>): tc.ITokenConsumer<PAnnotation> {
+    function x <PAnnotation>($: null, $i: api.IHeaderParserHandler<PAnnotation>): mtc.ITokenConsumer<PAnnotation> {
         type RootContext = {
             state:
             | ['expecting header or body', {}]
@@ -21,7 +17,7 @@ export const $$: api.CcreateHeaderParser = ($d) => {
                 embeddedSchemaAnnotation: PAnnotation
             }]
             | ['header is parsed', {
-                parser: tc.ITokenConsumer<PAnnotation>
+                parser: mtc.ITokenConsumer<PAnnotation>
             }]
         }
 

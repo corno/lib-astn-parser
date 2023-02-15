@@ -162,7 +162,7 @@
 //             error: lib.TreeParserError;
 //             annotation: tokAPI.TokenizerAnnotationData;
 //         }) => {
-//             actualEvents.push(["parsingerror", lib.init().createTreeParserErrorMessage($.error), getRange(test.testForLocation, $.annotation.range)])
+//             actualEvents.push(parsingerror(lib.init().createTreeParserErrorMessage($.error), getRange(test.testForLocation, $.annotation.range)))
 //         }
 
 //         const parserLib = lib.init()
@@ -181,7 +181,7 @@
 //                     //     //actualEvents.push(["stream end", null])
 //                     //     return {
 //                     //         onToken: () => {
-//                     //             actualEvents.push(["parsingerror", "unexpected data after end", null])
+//                     //             actualEvents.push(parsingerror("unexpected data after end", null))
 //                     //         },
 //                     //         onEnd: () => {
 
@@ -195,13 +195,13 @@
 
 //         const spt = tok.init().createCreateTokenizer({
 //             onError: ($) => {
-//                 actualEvents.push(["parsingerror", tok.init().createTokenizerErrorMessage($.error), getRange(test.testForLocation, $.range)])
+//                 actualEvents.push(parsingerror(tok.init().createTokenizerErrorMessage($.error), getRange(test.testForLocation, $.range)))
 //             },
 //         })(
 //             {
 //                 consumer: parserLib.createCreateHeaderParser<tokAPI.TokenizerAnnotationData>({
 //                     onError: ($) => {
-//                         actualEvents.push(["parsingerror", lib.init().createHeaderErrorMessage($.error), getRange(test.testForLocation, $.annotation.range)])
+//                         actualEvents.push(parsingerror(lib.init().createHeaderErrorMessage($.error), getRange(test.testForLocation, $.annotation.range)))
 
 //                     },
 //                 })({
