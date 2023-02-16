@@ -26,6 +26,7 @@ export const $: mproject.T.Project = {
         'executables': d({}),
         'test': {
             'dependencies': d({
+                "lib-astn-dummyhandlers": {},
             }),
             'glossary': {
                 'functions': d({}),
