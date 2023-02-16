@@ -3,15 +3,15 @@ import * as pr from 'pareto-core-raw'
 import { $ as extensionTests } from "./ASTNTestSet.data"
 import { $ as ownJSONTests } from "./ownJSONTestset.data"
 
-import * as api from "../interface"
+import * as api from "../glossary"
 
-export const data: api.TTestData = pr.wrapRawDictionary({
+export const $: api.T.TestData = pr.wrapRawDictionary({
     "ASTN": {
         'definitions': extensionTests,
-        'type': ['astn', null],
+        'type': ['astn', {}],
     },
     "own": {
         'definitions': ownJSONTests,
-        'type': ['json', null],
+        'type': ['json', {}],
     },
 })

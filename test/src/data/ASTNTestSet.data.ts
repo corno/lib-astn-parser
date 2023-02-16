@@ -1,6 +1,6 @@
 import * as pr from 'pareto-core-raw'
 
-import * as api from "../interface"
+import * as api from "../glossary"
 import {
     multilineString,
     openTaggedUnion,
@@ -18,11 +18,11 @@ import {
     taggedUnionEnd,
     test,
     treeEnd,
-} from "../interface/shorthands.p"
+} from "../shorthands.p"
 
 const d = pr.wrapRawDictionary
 
-export const $: api.TTestDefinitions = d({
+export const $: api.T.TestData.D.definitions = d({
     "unexpected data after end": test(
         `"foo" "bar"`,
         [
