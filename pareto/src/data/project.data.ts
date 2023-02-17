@@ -1,8 +1,8 @@
-import * as pr from 'pareto-core-raw'
+import * as pd from 'pareto-core-data'
 
 import * as mproject from "lib-pareto-typescript-project/dist/submodules/project"
 
-const d = pr.wrapRawDictionary
+const d = pd.wrapRawDictionary
 
 import { $ as api } from "./api.data"
 import { array, dictionary, group, member, string, taggedUnion, type } from 'lib-pareto-typescript-project/dist/submodules/glossary/shorthands.p'
