@@ -18,7 +18,7 @@ import {
     taggedUnionEnd,
     test,
     treeEnd,
-} from "../shorthands.p"
+} from "../shorthands"
 
 const d = pr.wrapRawDictionary
 
