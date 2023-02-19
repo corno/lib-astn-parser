@@ -8,13 +8,13 @@ import {
     boolean,
     typeReference,
     dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method, type, context, glossaryParameter, parametrizedTypeReference, parametrizedReference
-} from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands.p"
+} from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
 import * as mglossary from "lib-pareto-typescript-project/dist/submodules/glossary"
 
-const d = pd.wrapRawDictionary
+const d = pd.d
 
-export const $: mglossary.T.Glossary<string> = {
+export const $: mglossary.T.Glossary<pd.SourceLocation> = {
     'imports': d({
         "common": "glo-pareto-common",
         "tc": "glo-astn-tokenconsumer",

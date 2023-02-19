@@ -2,7 +2,7 @@
 // import * as pb from 'pareto-core-exe'
 // import * as pc from "pareto-core-candidates"
 
-// pl.logDebugMessage("no tests yet")
+// pv.logDebugMessage("no tests yet")
 
 // import * as lib from "../../../pub/dist"
 // import * as fsRes from "pareto-filesystem-res"
@@ -37,7 +37,7 @@
 //         }),
 //         onEnd: () => {
 
-//             pl.logDebugMessage(JSON.stringify(res, undefined, "\t"))
+//             pv.logDebugMessage(JSON.stringify(res, undefined, "\t"))
 //         }
 //     }
 // }
@@ -149,7 +149,7 @@
 //     if ($.argument === undefined) {
 //         throw "HMMMM"
 //     }
-//     pl.logDebugMessage($.argument)
+//     pv.logDebugMessage($.argument)
 //     fsRes.$.readFile(
 //         {
 //             path: [$.argument, "in.astn"]
@@ -178,7 +178,7 @@
 //                                         throw "FIXME"
 //                                     },
 //                                     onNoInternalSchema: () => {
-//                                         pl.logDebugMessage("NO INTERNAL SCHEMA ")
+//                                         pv.logDebugMessage("NO INTERNAL SCHEMA ")
 //                                         return {
 //                                             onEnd: () => {
 
@@ -187,7 +187,7 @@
 //                                         }
 //                                     },
 //                                     onSchemaReference: ($) => {
-//                                         pl.logDebugMessage($.token.token.value)
+//                                         pv.logDebugMessage($.token.token.value)
 //                                         if ($.token.token.value !== "mrshl/schemaschema@0.1") {
 //                                             throw "FIXME"
 //                                         }
@@ -227,7 +227,7 @@
 //                                             //                         fp.processBlock(($) => $)(
 //                                             //                             {
 //                                             //                                 onData: ($) => {
-//                                             //                                     pl.logDebugMessage("FIXME!!!!")
+//                                             //                                     pv.logDebugMessage("FIXME!!!!")
 //                                             //                                 },
 //                                             //                                 onEnd: () => {
 
@@ -255,7 +255,7 @@
 //                                         })
 //                                         return {
 //                                             onToken: ($) => {
-//                                                 //pl.logDebugMessage($.token[0])
+//                                                 //pv.logDebugMessage($.token[0])
 //                                                 tmp.onToken($)
 //                                             },
 //                                             onEnd: ($) => {
