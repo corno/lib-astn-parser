@@ -1,4 +1,4 @@
-import * as pr from 'pareto-core-raw'
+import * as pr from 'pareto-core-data'
 
 import * as t from "./glossary"
 
@@ -55,7 +55,7 @@ export function instanceDataStart(): t.T.TestData.D.definitions.D.events.A {
 export function test(input: string, events: t.T.TestData.D.definitions.D.events.A[]): t.T.TestData.D.definitions.D {
     return {
         'text': input,
-        'events': pr.wrapRawArray(events)
+        'events': pr.a(events)
     }
 
 }

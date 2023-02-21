@@ -1,4 +1,4 @@
-import * as pr from 'pareto-core-raw'
+import * as pr from 'pareto-core-data'
 
 import * as api from "../glossary"
 import {
@@ -20,7 +20,7 @@ import {
     treeEnd,
 } from "../shorthands"
 
-const d = pr.wrapRawDictionary
+const d = pr.d
 
 export const $: api.T.TestData.D.definitions = d({
     "unexpected data after end": test(
