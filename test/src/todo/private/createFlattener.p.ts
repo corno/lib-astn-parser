@@ -33,16 +33,16 @@
 
 //     function doSimpleString($: th.SimpleStringToken<PAnnotation>) {
 //         onEvent(
-//             ["simple string", {
+//             ['simple string', {
 //                 value: $.token.value,
 //                 wrapping: ((): ap.Wrapping => {
 //                     switch ($.token.wrapping[0]) {
-//                         case "apostrophe":
-//                             return ["apostrophe", { }]
-//                         case "none":
-//                             return ["none", { }]
-//                         case "quote":
-//                             return ["quote", { }]
+//                         case 'apostrophe':
+//                             return ['apostrophe', { }]
+//                         case 'none':
+//                             return ['none', { }]
+//                         case 'quote':
+//                             return ['quote', { }]
 //                         default:
 //                             return pl.au($.token.wrapping[0])
 //                     }
@@ -57,13 +57,13 @@
 //             array: ($) => {
 //                 const open$ = $
 //                 onEvent(
-//                     ["structural", {
+//                     ['structural', {
 //                         "type": ((): ap.StructuralTokenType => {
 //                             switch ($.token.token.type[0]) {
-//                                 case "list":
-//                                     return ["open list", null]
-//                                 case "shorthand group":
-//                                     return ["open shorthand group", null]
+//                                 case 'list':
+//                                     return ['open list', null]
+//                                 case 'shorthand group':
+//                                     return ['open shorthand group', null]
 //                                 default:
 //                                     return pl.au($.token.token.type[0])
 //                             }
@@ -77,13 +77,13 @@
 //                     },
 //                     onEnd: ($) => {
 //                         onEvent(
-//                             ["structural", {
+//                             ['structural', {
 //                                 "type": ((): ap.StructuralTokenType => {
 //                                     switch (open$.token.token.type[0]) {
-//                                         case "list":
-//                                             return ["close list", null]
-//                                         case "shorthand group":
-//                                             return ["close shorthand group", null]
+//                                         case 'list':
+//                                             return ['close list', null]
+//                                         case 'shorthand group':
+//                                             return ['close shorthand group', null]
 //                                         default:
 //                                             return pl.au(open$.token.token.type[0])
 //                                     }
@@ -97,13 +97,13 @@
 //             object: ($) => {
 //                 const open$ = $
 //                 onEvent(
-//                     ["structural", {
+//                     ['structural', {
 //                         "type": ((): ap.StructuralTokenType => {
 //                             switch ($.token.token.type[0]) {
-//                                 case "dictionary":
-//                                     return ["open dictionary", null]
-//                                 case "verbose group":
-//                                     return ["open verbose group", null]
+//                                 case 'dictionary':
+//                                     return ['open dictionary', null]
+//                                 case 'verbose group':
+//                                     return ['open verbose group', null]
 //                                 default:
 //                                     return pl.au($.token.token.type[0])
 //                             }
@@ -122,13 +122,13 @@
 //                     },
 //                     onEnd: ($) => {
 //                         onEvent(
-//                             ["structural", {
+//                             ['structural', {
 //                                 "type": ((): ap.StructuralTokenType => {
 //                                     switch (open$.token.token.type[0]) {
-//                                         case "dictionary":
-//                                             return ["close dictionary", null]
-//                                         case "verbose group":
-//                                             return ["close verbose group", null]
+//                                         case 'dictionary':
+//                                             return ['close dictionary', null]
+//                                         case 'verbose group':
+//                                             return ['close verbose group', null]
 //                                         default:
 //                                             return pl.au(open$.token.token.type[0])
 //                                     }
@@ -144,7 +144,7 @@
 //             },
 //             multilineString: ($) => {
 //                 onEvent(
-//                     ["multiline string", {
+//                     ['multiline string', {
 //                         lines: $.token.token.lines.map(($) => {
 //                             return $
 //                         }),
@@ -154,8 +154,8 @@
 //             },
 //             taggedUnion: ($) => {
 //                 onEvent(
-//                     ["structural", {
-//                         "type": ["tagged union start", null],
+//                     ['structural', {
+//                         "type": ['tagged union start', null],
 //                     }],
 //                     $.token.annotation
 //                 )

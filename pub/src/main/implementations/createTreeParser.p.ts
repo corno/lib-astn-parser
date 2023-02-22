@@ -1,14 +1,14 @@
 import * as pl from 'pareto-core-lib'
-import * as pm from 'pareto-core-state'
+import * as ps from 'pareto-core-state'
 
-import * as api from "../api"
+import * as mapi from "../api"
 
 import * as mh from "glo-astn-handlers"
 import * as mtc from "glo-astn-tokenconsumer"
 
-export const $$: api.CcreateTreeParser = ($d: {}) => {
+export const $$: mapi.CcreateTreeParser = ($d: {}) => {
 
-    return <PAnnotation>($: null, $i: api.ITreeParserHandler<PAnnotation>) => {
+    return <PAnnotation>($: null, $i: mapi.ITreeParserHandler<PAnnotation>) => {
 
         function createTreeParser(
         ): mtc.ITokenConsumer<PAnnotation> {
@@ -44,7 +44,7 @@ export const $$: api.CcreateTreeParser = ($d: {}) => {
 
             type Processing = {
                 currentContext: ContextType
-                stack: pm.Stack<ContextType>
+                stack: ps.Stack<ContextType>
             }
 
             type State2 =
@@ -55,13 +55,13 @@ export const $$: api.CcreateTreeParser = ($d: {}) => {
                 currentContext: ['expecting value', {
                     handler: $i.handler.root
                 }],
-                stack: pm.createStack(pl.createEmptyArray()),
+                stack: ps.createEmptyStack(),
             }]
 
 
             return {
                 onToken: (token) => {
-                    function raiseError(error: api.T.TreeParserError<PAnnotation>) {
+                    function raiseError(error: mapi.T.TreeParserError<PAnnotation>) {
                         $i.onError({
                             error: error,
                             annotation: token.annotation,
@@ -385,7 +385,7 @@ export const $$: api.CcreateTreeParser = ($d: {}) => {
                     handleToken()
                 },
                 onEnd: (endAnnotation) => {
-                    function raiseError(error: api.T.TreeParserError<PAnnotation>) {
+                    function raiseError(error: mapi.T.TreeParserError<PAnnotation>) {
                         $i.onError({
                             error: error,
                             annotation: endAnnotation,

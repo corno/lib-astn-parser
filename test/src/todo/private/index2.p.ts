@@ -1,6 +1,6 @@
 // import * as pl from 'pareto-core-lib'
 // import * as pb from 'pareto-core-exe'
-// import * as pc from "pareto-core-candidates"
+// import * as pc from 'pareto-core-candidates'
 
 // pv.logDebugMessage("no tests yet")
 
@@ -156,12 +156,12 @@
 //         },
 //     ).execute($ => {
 //         switch ($[0]) {
-//             case "error":
+//             case 'error':
 //                 pl.cc($[1], ($) => {
 //                     logError(`FS error: ${$.error[0]}`)
 //                 })
 //                 break
-//             case "success":
+//             case 'success':
 //                 pl.cc($[1], ($) => {
 //                     const tok = createTokenizer({
 //                         consumer: parserLib.createCreateHeaderParser<ata.TokenizerAnnotationData>(

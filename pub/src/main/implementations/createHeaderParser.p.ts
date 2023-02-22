@@ -1,11 +1,10 @@
 import * as pl from 'pareto-core-lib'
 
-import * as api from "../api"
-
+import * as mapi from "../api"
 import * as mtc from "glo-astn-tokenconsumer"
 
-export const $$: api.CcreateHeaderParser = ($d) => {
-    function x <PAnnotation>($: null, $i: api.IHeaderParserHandler<PAnnotation>): mtc.ITokenConsumer<PAnnotation> {
+export const $$: mapi.CcreateHeaderParser = ($d) => {
+    function x <PAnnotation>($: null, $i: mapi.IHeaderParserHandler<PAnnotation>): mtc.ITokenConsumer<PAnnotation> {
         type RootContext = {
             state:
             | ['expecting header or body', {}]
@@ -25,7 +24,7 @@ export const $$: api.CcreateHeaderParser = ($d) => {
 
         return {
             onEnd: (annotation) => {
-                function raiseError(error: api.T.HeaderParserError<PAnnotation>) {
+                function raiseError(error: mapi.T.HeaderParserError<PAnnotation>) {
                     $i.onError({
                         error: error,
                         annotation: annotation,
@@ -56,7 +55,7 @@ export const $$: api.CcreateHeaderParser = ($d) => {
             },
             onToken: ($) => {
                 const data = $
-                function raiseError(error: api.T.HeaderParserError<PAnnotation>) {
+                function raiseError(error: mapi.T.HeaderParserError<PAnnotation>) {
                     $i.onError({
                         error: error,
                         annotation: $.annotation,

@@ -1,6 +1,6 @@
 // import * as pl from 'pareto-core-lib'
 // import * as pt from 'pareto-core-types'
-// import * as pc from "pareto-core-candidates"
+// import * as pc from 'pareto-core-candidates'
 // import * as h from "astn-handlers-api"
 
 // import * as lib from "../../../pub/dist"
@@ -15,7 +15,7 @@
 // import * as testLib from "pareto-test-lib"
 // import * as fs from "pareto-filesystem-res"
 // import * as diff from "pareto-diff-lib"
-// import * as async from "pareto-core-async"
+// import * as async from 'pareto-core-async'
 
 // export function test(): testLib.TTestSet {
 
@@ -76,47 +76,47 @@
 //         ): h.ITreeHandler<tokAPI.TokenizerAnnotationData> {
 //             return {
 //                 onEnd: () => {
-//                     actualEvents.push(["tree end", null])
+//                     actualEvents.push(['tree end', null])
 //                 },
 //                 root: createFlattener(
 //                     ($) => {
 //                         const annotation = $.annotation
 //                         switch ($.token[0]) {
-//                             case "header start": {
+//                             case 'header start': {
 //                                 pc.panic("unexpected header")
 //                                 break
 //                             }
-//                             case "structural": {
+//                             case 'structural': {
 //                                 pl.cc($.token[1], ($) => {
 //                                     switch ($.type[0]) {
-//                                         case "close dictionary":
-//                                             actualEvents.push(["token", "closeobject", getRange(test.testForLocation, annotation.range)])
+//                                         case 'close dictionary':
+//                                             actualEvents.push(['token', "closeobject", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "close list":
-//                                             actualEvents.push(["token", "closearray", getRange(test.testForLocation, annotation.range)])
+//                                         case 'close list':
+//                                             actualEvents.push(['token', "closearray", getRange(test.testForLocation, annotation.range)])
 
 //                                             break
-//                                         case "close shorthand group":
-//                                             actualEvents.push(["token", "closearray", getRange(test.testForLocation, annotation.range)])
+//                                         case 'close shorthand group':
+//                                             actualEvents.push(['token', "closearray", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "close verbose group":
-//                                             actualEvents.push(["token", "closeobject", getRange(test.testForLocation, annotation.range)])
+//                                         case 'close verbose group':
+//                                             actualEvents.push(['token', "closeobject", getRange(test.testForLocation, annotation.range)])
 //                                             break
 
-//                                         case "open dictionary":
-//                                             actualEvents.push(["token", "openobject", "{", getRange(test.testForLocation, annotation.range)])
+//                                         case 'open dictionary':
+//                                             actualEvents.push(['token', "openobject", "{", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "open list":
-//                                             actualEvents.push(["token", "openarray", "[", getRange(test.testForLocation, annotation.range)])
+//                                         case 'open list':
+//                                             actualEvents.push(['token', "openarray", "[", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "open shorthand group":
-//                                             actualEvents.push(["token", "openarray", "<", getRange(test.testForLocation, annotation.range)])
+//                                         case 'open shorthand group':
+//                                             actualEvents.push(['token', "openarray", "<", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "open verbose group":
-//                                             actualEvents.push(["token", "openobject", "(", getRange(test.testForLocation, annotation.range)])
+//                                         case 'open verbose group':
+//                                             actualEvents.push(['token', "openobject", "(", getRange(test.testForLocation, annotation.range)])
 //                                             break
-//                                         case "tagged union start":
-//                                             actualEvents.push(["token", "opentaggedunion", getRange(test.testForLocation, annotation.range)])
+//                                         case 'tagged union start':
+//                                             actualEvents.push(['token', "opentaggedunion", getRange(test.testForLocation, annotation.range)])
 //                                             break
 //                                         default:
 //                                             pl.au($.type[0])
@@ -124,14 +124,14 @@
 //                                 })
 //                                 break
 //                             }
-//                             case "simple string": {
+//                             case 'simple string': {
 //                                 const data = $.token[1]
-//                                 actualEvents.push(["token", "simple string", data.value, getRange(test.testForLocation, annotation.range)])
+//                                 actualEvents.push(['token', "simple string", data.value, getRange(test.testForLocation, annotation.range)])
 //                                 break
 //                             }
-//                             case "multiline string": {
+//                             case 'multiline string': {
 //                                 const data = $.token[1]
-//                                 actualEvents.push(["token", "multiline string", data.lines.join("\\n"), getRange(test.testForLocation, annotation.range)])
+//                                 actualEvents.push(['token', "multiline string", data.lines.join("\\n"), getRange(test.testForLocation, annotation.range)])
 //                                 break
 //                             }
 //                             default:
@@ -146,7 +146,7 @@
 //                         actualEvents.push(["missing"])
 //                     },
 //                     // () => {
-//                     //     actualEvents.push(["tree end", null])
+//                     //     actualEvents.push(['tree end', null])
 
 //                     //     return onEnd()
 //                     // }
@@ -174,7 +174,7 @@
 
 //                 handler: createLogger(
 //                     // () => {
-//                     //     //actualEvents.push(["stream end", null])
+//                     //     //actualEvents.push(['stream end', null])
 //                     //     return {
 //                     //         onToken: () => {
 //                     //             actualEvents.push(parsingerror("unexpected data after end", null))
@@ -206,7 +206,7 @@
 //                             return createContentParser()
 //                         },
 //                         onEmbeddedSchema: (_schemaSchemaName) => {
-//                             actualEvents.push(["token", "schema data start"])
+//                             actualEvents.push(['token', "schema data start"])
 //                             const logger = createLogger(
 //                             )
 //                             let tp = parserLib.createCreateTreeParser<tokAPI.TokenizerAnnotationData>({
@@ -215,7 +215,7 @@
 //                                 handler: {
 //                                     root: logger.root,
 //                                     onEnd: () => {
-//                                         //actualEvents.push(["tree end", null])
+//                                         //actualEvents.push(['tree end', null])
 //                                         logger.onEnd()
 //                                         tp = createContentParser()
 //                                     }
@@ -231,8 +231,8 @@
 //                             }
 //                         },
 //                         onSchemaReference: ($$) => {
-//                             actualEvents.push(["token", "schema data start"])
-//                             actualEvents.push(["token", "simple string", $$.token.token.value, getRange(test.testForLocation, $$.token.annotation.range)])
+//                             actualEvents.push(['token', "schema data start"])
+//                             actualEvents.push(['token', "simple string", $$.token.token.value, getRange(test.testForLocation, $$.token.annotation.range)])
 //                             // if (test.testHeaders) {
 //                             //     actualEvents.push(["instance data start"])
 //                             // }
@@ -252,7 +252,7 @@
 //             spt.onData($)
 //         })
 //         spt.onEnd()
-//         actualEvents.push(["stream end", null])
+//         actualEvents.push(['stream end', null])
 
 
 
@@ -285,9 +285,9 @@
 //             success = false
 //         })
 //         return {
-//             type: ["test", {
+//             'type': ['test', {
 //                 success: success,
-//                 type: ["large string", {
+//                 type: ['large string', {
 //                     parts: parts
 //                     // expected: JSON.stringify(test.events, undefined, "\t"),
 //                     // actual: JSON.stringify(actualEvents, undefined, "\t"),
@@ -353,7 +353,7 @@
 //         tests: pt.Dictionary<TestDefinition>
 //     ): testLib.TTestElement {
 //         return {
-//             type: ["subset", {
+//             type: ['subset', {
 //                 elements: tests.map(($, key) => {
 //                     return createTestFunction(
 //                         pl.createArray([$.text]),

@@ -1,8 +1,8 @@
 import * as pl from 'pareto-core-lib'
 
-import * as api from "../api"
+import * as mapi from "../api"
 
-export const $$: api.CcreateHeaderParserErrorMessage = ($) => {
+export const $$: mapi.CcreateHeaderParserErrorMessage = ($) => {
     switch ($[0]) {
         case 'expected an embedded schema': {
             return `expected an embedded schema`

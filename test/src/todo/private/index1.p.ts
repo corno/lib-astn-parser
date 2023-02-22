@@ -2,7 +2,7 @@
 
 // import * as pb from 'pareto-core-exe'
 // import * as pl from 'pareto-core-lib'
-// import * as pa from "pareto-core-async"
+// import * as pa from 'pareto-core-async'
 
 // import * as fsLib from "pareto-filesystem-lib"
 
@@ -47,10 +47,10 @@
 //                     root: {
 //                         elements: pl.createDictionary<testLib.TTestElement>({
 //                             "x": {
-//                                 type: ["subset", $.first]
+//                                 type: ['subset', $.first]
 //                             },
 //                             "y": {
-//                                 type: ["subset", $.second]
+//                                 type: ['subset', $.second]
 //                             },
 //                         })
 //                     }
