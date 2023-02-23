@@ -2,13 +2,13 @@ import * as pd from 'pareto-core-data'
 
 import { definitionReference, constructor, algorithm } from "lib-pareto-typescript-project/dist/submodules/moduleDefinition/shorthands"
 
-import * as mmoduleDefinition from "lib-pareto-typescript-project/dist/submodules/moduleDefinition"
+import * as gmoduleDefinition from "lib-pareto-typescript-project/dist/submodules/moduleDefinition"
 
 import { $ as glossary } from "./glossary.data"
 
 const d = pd.d
 
-export const $: mmoduleDefinition.T.ModuleDefinition<pd.SourceLocation> = {
+export const $: gmoduleDefinition.T.ModuleDefinition<pd.SourceLocation> = {
     'glossary': glossary,
     'api': {
         'imports': d({

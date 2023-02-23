@@ -1,13 +1,13 @@
 import * as pd from 'pareto-core-data'
 
-import * as mproject from "lib-pareto-typescript-project/dist/submodules/project"
+import * as gproject from "lib-pareto-typescript-project/dist/submodules/project"
 
 const d = pd.d
 
 import { $ as api } from "./api.data"
 import { array, dictionary, group, member, string, taggedUnion, type } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
-export const $: mproject.T.Project<pd.SourceLocation> = {
+export const $: gproject.T.Project<pd.SourceLocation> = {
     'author': "Corno",
     'description': "the ASTN parser",
     'license': "ISC",

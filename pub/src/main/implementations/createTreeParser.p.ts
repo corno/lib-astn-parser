@@ -1,23 +1,24 @@
 import * as pl from 'pareto-core-lib'
 import * as ps from 'pareto-core-state'
 
-import * as mapi from "../api"
+import * as gapi from "../api"
+import * as gh from "glo-astn-handlers"
+import * as gtc from "glo-astn-tokenconsumer"
 
-import * as mh from "glo-astn-handlers"
-import * as mtc from "glo-astn-tokenconsumer"
+import { CcreateTreeParser } from "../api"
 
-export const $$: mapi.CcreateTreeParser = ($d: {}) => {
+export const $$:CcreateTreeParser = ($d: {}) => {
 
-    return <PAnnotation>($: null, $i: mapi.ITreeParserHandler<PAnnotation>) => {
+    return <PAnnotation>($: null, $i: gapi.ITreeParserHandler<PAnnotation>) => {
 
         function createTreeParser(
-        ): mtc.ITokenConsumer<PAnnotation> {
+        ): gtc.ITokenConsumer<PAnnotation> {
 
             type ObjectContext = {
                 type:
                 | ['dictionary', null]
                 | ['verbose group', null]
-                readonly objectHandler: mh.IObjectHandler<PAnnotation>
+                readonly objectHandler: gh.IObjectHandler<PAnnotation>
             }
 
             type ArrayContext = {
@@ -25,15 +26,15 @@ export const $$: mapi.CcreateTreeParser = ($d: {}) => {
                 | ['list', null]
                 | ['shorthand group', null]
                 foundElements: boolean
-                readonly arrayHandler: mh.IArrayHandler<PAnnotation>
+                readonly arrayHandler: gh.IArrayHandler<PAnnotation>
             }
 
             type TaggedUnionContext = {
-                readonly handler: mh.ITaggedUnionHandler<PAnnotation>
+                readonly handler: gh.ITaggedUnionHandler<PAnnotation>
             }
 
             type ExpectingValue = {
-                handler: mh.IRequiredValueHandler<PAnnotation>
+                handler: gh.IRequiredValueHandler<PAnnotation>
             }
 
             type ContextType =
@@ -61,7 +62,7 @@ export const $$: mapi.CcreateTreeParser = ($d: {}) => {
 
             return {
                 onToken: (token) => {
-                    function raiseError(error: mapi.T.TreeParserError<PAnnotation>) {
+                    function raiseError(error: gapi.T.TreeParserError<PAnnotation>) {
                         $i.onError({
                             error: error,
                             annotation: token.annotation,
@@ -117,7 +118,7 @@ export const $$: mapi.CcreateTreeParser = ($d: {}) => {
                                         processing.currentContext = newContext
                                     }
                                     function testForValue(
-                                        onValue: () => mh.IValueHandler<PAnnotation>,
+                                        onValue: () => gh.IValueHandler<PAnnotation>,
                                         onNonValue: (
                                             token:
                                                 | ['close object', null]
@@ -385,7 +386,7 @@ export const $$: mapi.CcreateTreeParser = ($d: {}) => {
                     handleToken()
                 },
                 onEnd: (endAnnotation) => {
-                    function raiseError(error: mapi.T.TreeParserError<PAnnotation>) {
+                    function raiseError(error: gapi.T.TreeParserError<PAnnotation>) {
                         $i.onError({
                             error: error,
                             annotation: endAnnotation,

@@ -1,10 +1,12 @@
 import * as pl from 'pareto-core-lib'
 
-import * as mapi from "../api"
-import * as mtc from "glo-astn-tokenconsumer"
+import * as gapi from "../api"
+import * as gtc from "glo-astn-tokenconsumer"
 
-export const $$: mapi.CcreateHeaderParser = ($d) => {
-    function x <PAnnotation>($: null, $i: mapi.IHeaderParserHandler<PAnnotation>): mtc.ITokenConsumer<PAnnotation> {
+import { CcreateHeaderParser } from "../api"
+
+export const $$:CcreateHeaderParser = ($d) => {
+    function x <PAnnotation>($: null, $i: gapi.IHeaderParserHandler<PAnnotation>): gtc.ITokenConsumer<PAnnotation> {
         type RootContext = {
             state:
             | ['expecting header or body', {}]
@@ -16,7 +18,7 @@ export const $$: mapi.CcreateHeaderParser = ($d) => {
                 embeddedSchemaAnnotation: PAnnotation
             }]
             | ['header is parsed', {
-                parser: mtc.ITokenConsumer<PAnnotation>
+                parser: gtc.ITokenConsumer<PAnnotation>
             }]
         }
 
@@ -24,7 +26,7 @@ export const $$: mapi.CcreateHeaderParser = ($d) => {
 
         return {
             onEnd: (annotation) => {
-                function raiseError(error: mapi.T.HeaderParserError<PAnnotation>) {
+                function raiseError(error: gapi.T.HeaderParserError<PAnnotation>) {
                     $i.onError({
                         error: error,
                         annotation: annotation,
@@ -55,7 +57,7 @@ export const $$: mapi.CcreateHeaderParser = ($d) => {
             },
             onToken: ($) => {
                 const data = $
-                function raiseError(error: mapi.T.HeaderParserError<PAnnotation>) {
+                function raiseError(error: gapi.T.HeaderParserError<PAnnotation>) {
                     $i.onError({
                         error: error,
                         annotation: $.annotation,

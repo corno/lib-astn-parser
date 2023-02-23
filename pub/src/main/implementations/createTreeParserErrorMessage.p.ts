@@ -1,8 +1,10 @@
 import * as pl from 'pareto-core-lib'
 
-import * as mapi from "../api"
 
-export const $$: mapi.CcreateTreeParserErrorMessage = ($) => {
+
+import { CcreateTreeParserErrorMessage } from "../api"
+
+export const $$:CcreateTreeParserErrorMessage = ($) => {
     switch ($[0]) {
         case 'missing array close': {
             return $[0]
