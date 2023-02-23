@@ -59,7 +59,6 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                 stack: ps.createEmptyStack(),
             }]
 
-
             return {
                 onToken: (token) => {
                     function raiseError(error: gapi.T.TreeParserError<PAnnotation>) {

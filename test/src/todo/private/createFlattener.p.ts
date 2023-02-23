@@ -4,7 +4,6 @@
 
 // import * as th from "api-astn-handlers"
 
-
 // export function createFlattener<PAnnotation>(
 //     onToken: ($: {
 //         token: tc.Token,

@@ -66,12 +66,10 @@ export const $$:CcreateHeaderParser = ($d) => {
                 switch (rootContext.state[0]) {
                     case 'expecting header or body': {
                         if ($.token[0] === 'header start') {
-
                             rootContext.state = ['expecting schema reference or embedded schema', {
                                 headerAnnotation: $.annotation,
                             }]
                         } else {
-
                             const bp = $i.handler.onNoInternalSchema(null)
                             rootContext.state = ['header is parsed', {
                                 parser: bp,
@@ -90,7 +88,6 @@ export const $$:CcreateHeaderParser = ($d) => {
                                 }]
                                 break
                             }
-
                             case 'structural': {
                                 pl.cc($.token[1], ($) => {
                                     raiseError(['expected a schema reference or an embedded schema', {}])
@@ -118,8 +115,6 @@ export const $$:CcreateHeaderParser = ($d) => {
                                 })
                                 break
                             }
-
-
                             default:
                                 pl.au($.token[0])
                         }
@@ -183,7 +178,6 @@ export const $$:CcreateHeaderParser = ($d) => {
                         const $ = rootContext.state[1]
                         const parser = $.parser
                         if (data.token[0] === 'header start') {
-
                             pl.panic("UNEXPECTED HEADER (ALREADY PARSED)")
                             //raiseError([""])
                         } else {

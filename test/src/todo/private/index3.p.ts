@@ -21,7 +21,6 @@
 
 //     const pLib = lib.init()
 
-
 //     const tests = pc.createDictionaryBuilderFIXME<testLib.TTestElement>()
 
 //     // function toArray<T, NT>(
@@ -254,8 +253,6 @@
 //         spt.onEnd()
 //         actualEvents.push(['stream end', null])
 
-
-
 //         //console.log(JSON.stringify(actualEvents))
 //         // console.log(JSON.stringify(test.events))
 //         // $ts.assertEqual(actualEvents, test.events)
@@ -297,7 +294,6 @@
 //     }
 
 //     // createRootTestSet(($ts) => {
-
 
 //     //     $ts.subset('astn', ($ts) => {
 //     //         $ts.subset('#strictJSON', ($ts) => {
@@ -348,7 +344,6 @@
 //     //     });
 //     // })
 
-
 //     function create(
 //         tests: pt.Dictionary<TestDefinition>
 //     ): testLib.TTestElement {
@@ -370,6 +365,5 @@
 //             '#ASTN-extension': create(selectedExtensionTests),
 //         })
 //     }
-
 
 // }
