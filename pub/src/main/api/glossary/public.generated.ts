@@ -2,14 +2,14 @@ import * as pt from 'pareto-core-types'
 
 import { T   } from './types.generated'
 
-import * as mcommon from "glo-pareto-common"
-import * as mh from "glo-astn-handlers"
-import * as mtc from "glo-astn-tokenconsumer"
+import * as gcommon from "glo-pareto-common"
+import * as gh from "glo-astn-handlers"
+import * as gtc from "glo-astn-tokenconsumer"
 
 export type IHeaderHandler<GPAnnotation> = {
-    'onEmbeddedSchema': ($: T.EmbeddedSchema<GPAnnotation>, ) => mtc.ITokenConsumer<T.Annotation<GPAnnotation>>
-    'onNoInternalSchema': ($: mcommon.T.Null, ) => mtc.ITokenConsumer<T.Annotation<GPAnnotation>>
-    'onSchemaReference': ($: T.SchemaReference<GPAnnotation>, ) => mtc.ITokenConsumer<T.Annotation<GPAnnotation>>
+    'onEmbeddedSchema': ($: T.EmbeddedSchema<GPAnnotation>, ) => gtc.ITokenConsumer<T.Annotation<GPAnnotation>>
+    'onNoInternalSchema': ($: gcommon.T.Null, ) => gtc.ITokenConsumer<T.Annotation<GPAnnotation>>
+    'onSchemaReference': ($: T.SchemaReference<GPAnnotation>, ) => gtc.ITokenConsumer<T.Annotation<GPAnnotation>>
 }
 
 export type IHeaderParserHandler<GPAnnotation> = {
@@ -18,14 +18,14 @@ export type IHeaderParserHandler<GPAnnotation> = {
 }
 
 export type ITreeParserHandler<GPAnnotation> = {
-    'handler': mh.ITreeHandler<T.Annotation<GPAnnotation>>
+    'handler': gh.ITreeHandler<T.Annotation<GPAnnotation>>
     'onError': ($: T.AnnotatedTreeParserError<GPAnnotation>, ) => void
 }
 
-export type FCreateHeaderParser = <GPAnnotation>($: mcommon.T.Null, $i: IHeaderParserHandler<GPAnnotation>,) => mtc.ITokenConsumer<T.Annotation<GPAnnotation>>
+export type FCreateHeaderParser = <GPAnnotation>($: gcommon.T.Null, $i: IHeaderParserHandler<GPAnnotation>,) => gtc.ITokenConsumer<T.Annotation<GPAnnotation>>
 
-export type FCreateHeaderParserErrorMessage = <GPAnnotation>($: T.HeaderParserError<GPAnnotation>,) => mcommon.T.String
+export type FCreateHeaderParserErrorMessage = <GPAnnotation>($: T.HeaderParserError<GPAnnotation>,) => gcommon.T.String
 
-export type FCreateTreeParser = <GPAnnotation>($: mcommon.T.Null, $i: ITreeParserHandler<GPAnnotation>,) => mtc.ITokenConsumer<T.Annotation<GPAnnotation>>
+export type FCreateTreeParser = <GPAnnotation>($: gcommon.T.Null, $i: ITreeParserHandler<GPAnnotation>,) => gtc.ITokenConsumer<T.Annotation<GPAnnotation>>
 
-export type FCreateTreeParserErrorMessage = <GPAnnotation>($: T.TreeParserError<GPAnnotation>,) => mcommon.T.String
+export type FCreateTreeParserErrorMessage = <GPAnnotation>($: T.TreeParserError<GPAnnotation>,) => gcommon.T.String

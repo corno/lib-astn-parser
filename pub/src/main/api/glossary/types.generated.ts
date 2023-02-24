@@ -1,8 +1,8 @@
 import * as pt from 'pareto-core-types'
 
-import * as mcommon from "glo-pareto-common"
-import * as mh from "glo-astn-handlers"
-import * as mtc from "glo-astn-tokenconsumer"
+import * as gcommon from "glo-pareto-common"
+import * as gh from "glo-astn-handlers"
+import * as gtc from "glo-astn-tokenconsumer"
 
 export namespace T {
     
@@ -38,13 +38,13 @@ export namespace T {
         
         export type headerAnnotation<GPAnnotation> = GPAnnotation
         
-        export type schemaSchemaReferenceToken<GPAnnotation> = mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+        export type schemaSchemaReferenceToken<GPAnnotation> = gh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
     }
     
     export type EmbeddedSchema<GPAnnotation> = {
         readonly 'embeddedSchemaAnnotation': GPAnnotation
         readonly 'headerAnnotation': GPAnnotation
-        readonly 'schemaSchemaReferenceToken': mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+        readonly 'schemaSchemaReferenceToken': gh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
     }
     
     export namespace HeaderParserError {
@@ -76,12 +76,12 @@ export namespace T {
         
         export type headerAnnotation<GPAnnotation> = GPAnnotation
         
-        export type token<GPAnnotation> = mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+        export type token<GPAnnotation> = gh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
     }
     
     export type SchemaReference<GPAnnotation> = {
         readonly 'headerAnnotation': GPAnnotation
-        readonly 'token': mh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
+        readonly 'token': gh.T.SimpleStringToken<T.Annotation<GPAnnotation>>
     }
     
     export namespace TreeParserError {
