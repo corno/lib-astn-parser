@@ -10,7 +10,7 @@ import { array, dictionary, group, member, string, taggedUnion, type } from "lib
 export const $: gproject.T.Project<pd.SourceLocation> = {
     'author': "Corno",
     'description': "the ASTN parser",
-    'license': "ISC",
+    'license': "TBD",
 
     'dependencies': d({
         "glo-pareto-common": {},
@@ -20,6 +20,7 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
     'type': ['library', {
         'main': {
             'definition': api,
+            'implementation': ['manual', {}],
         },
         'submodules': d({
         }),
