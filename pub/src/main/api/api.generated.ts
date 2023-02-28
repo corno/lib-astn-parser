@@ -1,16 +1,15 @@
 import * as pt from 'pareto-core-types'
 
-import * as gglo from "./glossary"
-
 import * as gcommon from "glo-pareto-common"
+import * as gthis from "./glossary"
 
-export type CcreateHeaderParser = ($d: {}) => gglo.FCreateHeaderParser
+export type CcreateHeaderParser = ($d: {}) => gthis.FCreateHeaderParser
 
-export type CcreateHeaderParserErrorMessage = gglo.FCreateHeaderParserErrorMessage
+export type CcreateHeaderParserErrorMessage = gthis.FCreateHeaderParserErrorMessage
 
-export type CcreateTreeParser = ($d: {}) => gglo.FCreateTreeParser
+export type CcreateTreeParser = ($d: {}) => gthis.FCreateTreeParser
 
-export type CcreateTreeParserErrorMessage = gglo.FCreateTreeParserErrorMessage
+export type CcreateTreeParserErrorMessage = gthis.FCreateTreeParserErrorMessage
 
 export type API = {
     createHeaderParser: CcreateHeaderParser

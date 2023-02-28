@@ -1,28 +1,24 @@
 import * as pd from 'pareto-core-data'
 
-import { definitionReference, constructor, algorithm } from "lib-pareto-typescript-project/dist/submodules/moduleDefinition/shorthands"
+import { functionReference, constructor, algorithm } from "lib-pareto-typescript-project/dist/submodules/api/shorthands"
 
-import * as gmoduleDefinition from "lib-pareto-typescript-project/dist/submodules/moduleDefinition"
-
-import { $ as glossary } from "./glossary.data"
+import * as gapi from "lib-pareto-typescript-project/dist/submodules/api"
 
 const d = pd.d
 
-export const $: gmoduleDefinition.T.ModuleDefinition<pd.SourceLocation> = {
-    'glossary': glossary,
-    'api': {
-        'imports': d({
-            "common": "glo-pareto-common",
-        }),
-        'algorithms': d({
-            "createHeaderParser": algorithm(definitionReference("CreateHeaderParser"), constructor(null, {
+export const $: gapi.T.API<pd.SourceLocation> = {
+    'imports': d({
+        "common": "glo-pareto-common",
+        "this": "./glossary",
+    }),
+    'algorithms': d({
+        "createHeaderParser": algorithm(functionReference("this", {}, "CreateHeaderParser"), constructor(null, {
 
-            })),
-            "createHeaderParserErrorMessage": algorithm(definitionReference("CreateHeaderParserErrorMessage")),
-            "createTreeParser": algorithm(definitionReference("CreateTreeParser"), constructor(null, {
-                
-            })),
-            "createTreeParserErrorMessage": algorithm(definitionReference("CreateTreeParserErrorMessage")),
-        })
-    },
+        })),
+        "createHeaderParserErrorMessage": algorithm(functionReference("this", {}, "CreateHeaderParserErrorMessage")),
+        "createTreeParser": algorithm(functionReference("this", {}, "CreateTreeParser"), constructor(null, {
+
+        })),
+        "createTreeParserErrorMessage": algorithm(functionReference("this", {}, "CreateTreeParserErrorMessage")),
+    })
 }

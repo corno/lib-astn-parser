@@ -5,6 +5,8 @@ import * as gproject from "lib-pareto-typescript-project/dist/submodules/project
 const d = pd.d
 
 import { $ as api } from "./api.data"
+import { $ as glossary } from "./glossary.data"
+
 import { array, dictionary, group, member, string, taggedUnion, type } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
 export const $: gproject.T.Project<pd.SourceLocation> = {
@@ -19,7 +21,10 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
     }),
     'type': ['library', {
         'main': {
-            'definition': api,
+            'definition': {
+                'glossary': glossary,
+                'api': api,
+            },
             'implementation': ['manual', {}],
         },
         'submodules': d({
