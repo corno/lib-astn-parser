@@ -8,10 +8,10 @@ import * as api from "../glossary"
 export const $: api.T.TestData = pr.d({
     "ASTN": {
         'definitions': extensionTests,
-        'type': ['astn', {}],
+        'type': ['astn', null],
     },
     "own": {
         'definitions': ownJSONTests,
-        'type': ['json', {}],
+        'type': ['json', null],
     },
 })

@@ -15,9 +15,9 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
     'license': "TBD",
 
     'dependencies': d({
-        "glo-pareto-common": {},
-        "glo-astn-tokenconsumer": {},
-        "glo-astn-handlers": {},
+        "glo-pareto-common": null,
+        "glo-astn-tokenconsumer": null,
+        "glo-astn-handlers": null,
     }),
     'type': ['library', {
         'main': {
@@ -25,14 +25,14 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
                 'glossary': glossary,
                 'api': api,
             },
-            'implementation': ['typescript', {}],
+            'implementation': ['typescript', null],
         },
         'submodules': d({
         }),
         'executables': d({}),
         'test': {
             'dependencies': d({
-                "lib-astn-dummyhandlers": {},
+                "lib-astn-dummyhandlers": null,
             }),
             'glossary': {
                 'functions': d({}),

@@ -35,15 +35,15 @@ export const $$:CcreateHeaderParser = ($d) => {
                 switch (rootContext.state[0]) {
                     case 'expecting header or body': {
                         //const $ = rootContext.state[1]
-                        raiseError(['expected the schema start (!) or root value', {}])
+                        raiseError(['expected the schema start (!) or root value', null])
                         break
                     }
                     case 'expecting schema reference or embedded schema': {
-                        raiseError(['expected a schema reference or an embedded schema', {}])
+                        raiseError(['expected a schema reference or an embedded schema', null])
                         break
                     }
                     case 'expecting schema schema reference': {
-                        raiseError(['expected a schema schema reference', {}])
+                        raiseError(['expected a schema schema reference', null])
                         break
                     }
                     case 'header is parsed': {
@@ -90,7 +90,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                             }
                             case 'structural': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(['expected a schema reference or an embedded schema', {}])
+                                    raiseError(['expected a schema reference or an embedded schema', null])
                                 })
                                 break
                             }
@@ -111,7 +111,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                             }
                             case 'multiline string': {
                                 pl.cc($.token[1], ($) => {
-                                    raiseError(['expected an embedded schema', {}])
+                                    raiseError(['expected an embedded schema', null])
                                 })
                                 break
                             }
@@ -124,7 +124,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                         const headerAnnotation = rootContext.state[1].headerAnnotation
                         const embeddedSchemaAnnotation = rootContext.state[1].embeddedSchemaAnnotation
                         if ($.token[0] !== 'simple string') {
-                            raiseError(['expected a schema schema reference', {}])
+                            raiseError(['expected a schema schema reference', null])
                         } else {
                             const x = $i.handler.onEmbeddedSchema({
                                 headerAnnotation: headerAnnotation,

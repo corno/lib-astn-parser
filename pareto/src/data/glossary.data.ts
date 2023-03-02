@@ -21,7 +21,7 @@ export const $: gglossary.T.Glossary<pd.SourceLocation> = {
         "h": "glo-astn-handlers",
     }),
     'parameters': d({
-        "Annotation": {},
+        "Annotation": null,
     }),
     'types': d({
         "AnnotatedHeaderParserError": type(group({

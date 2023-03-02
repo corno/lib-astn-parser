@@ -127,7 +127,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                     ) {
                                         switch (token.token[0]) {
                                             case 'header start': {
-                                                raiseError(['unexpected header start', {}])
+                                                raiseError(['unexpected header start', null])
                                                 break
                                             }
                                             case 'structural': {
@@ -259,7 +259,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                 testForValue(
                                                     () => $.handler.exists,
                                                     ($$) => {
-                                                        raiseError(['missing value', {}])
+                                                        raiseError(['missing value', null])
                                                         $.handler.missing(token.annotation)
                                                         pop()
                                                         handleToken()
@@ -279,7 +279,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                         switch ($[0]) {
                                                             case 'close object':
                                                                 pl.cc($[1], ($) => {
-                                                                    raiseError(['unexpected end of object', {}])
+                                                                    raiseError(['unexpected end of object', null])
                                                                 })
                                                                 break
                                                             case 'close array':
@@ -315,7 +315,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                 } else {
                                                     testForValue(
                                                         () => {
-                                                            raiseError(['missing key', {}])
+                                                            raiseError(['missing key', null])
                                                             return objectContext.objectHandler.anonymousProperty(token.annotation)
                                                         },
                                                         ($) => {
@@ -326,7 +326,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                 })
                                                                 pop()
                                                             } else {
-                                                                raiseError(['missing object close', {}])
+                                                                raiseError(['missing object close', null])
 
                                                                 pop()
                                                                 handleToken()
@@ -355,11 +355,11 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                     //we have an error
                                                     testForValue(
                                                         () => {
-                                                            raiseError(['missing option', {}])
+                                                            raiseError(['missing option', null])
                                                             return tuh.handler.missingOption(token.annotation).exists
                                                         },
                                                         () => {
-                                                            raiseError(['missing tagged union option and value', {}])
+                                                            raiseError(['missing tagged union option and value', null])
                                                             pop()
                                                             handleToken()
                                                         },
@@ -376,7 +376,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                 break
                             case 'done':
                                 pl.cc(state2[1], ($) => {
-                                    raiseError(['unexpected data after end', {}])
+                                    raiseError(['unexpected data after end', null])
                                 })
                                 break
                             default: pl.au(state2[0])
@@ -397,26 +397,26 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                 const state = $
                                 switch (state.currentContext[0]) {
                                     case 'expecting value': {
-                                        raiseError(['missing value', {}])
+                                        raiseError(['missing value', null])
                                         state.currentContext[1].handler.missing(endAnnotation)
 
                                         break
                                     }
                                     case 'processing array': {
                                         const $ = state.currentContext[1]
-                                        raiseError(['unexpected end of text', { 'still in': ['array', {}] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['array', null] }])
                                         break
                                     }
                                     case 'processing object': {
                                         const $ = state.currentContext[1]
-                                        raiseError(['unexpected end of text', { 'still in': ['object', {}] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['object', null] }])
                                         break
                                     }
                                     case 'processing taggedunion': {
                                         const $ = state.currentContext[1]
                                         $.handler.missingOption(endAnnotation)
 
-                                        raiseError(['unexpected end of text', { 'still in': ['tagged union', {}] }])
+                                        raiseError(['unexpected end of text', { 'still in': ['tagged union', null] }])
 
                                         break
                                     }
