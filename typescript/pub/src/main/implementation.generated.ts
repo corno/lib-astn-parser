@@ -1,4 +1,4 @@
-import { API } from "./api"
+import { API } from "./definition/api.generated"
 import { $$ as icreateHeaderParser } from "./implementations/createHeaderParser.p"
 import { $$ as icreateHeaderParserErrorMessage } from "./implementations/createHeaderParserErrorMessage.p"
 import { $$ as icreateTreeParser } from "./implementations/createTreeParser.p"

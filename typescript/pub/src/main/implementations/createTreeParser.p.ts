@@ -1,11 +1,11 @@
 import * as pl from 'pareto-core-lib'
 import * as ps from 'pareto-core-state'
 
-import * as gapi from "../api"
+import * as gapi from "../definition/glossary"
 import * as gh from "glo-astn-handlers"
 import * as gtc from "glo-astn-tokenconsumer"
 
-import { CcreateTreeParser } from "../api"
+import { CcreateTreeParser } from "../definition/api.generated"
 
 export const $$:CcreateTreeParser = ($d: {}) => {
 

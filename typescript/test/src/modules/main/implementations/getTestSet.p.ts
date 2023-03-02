@@ -6,7 +6,7 @@ import * as gtest from "lib-pareto-test"
 
 import * as gpub from "../../../../../pub"
 
-import { CgetTestSet } from "../api"
+import { CgetTestSet } from "../definition/api.generated"
 
 export const $$:CgetTestSet = () => {
 

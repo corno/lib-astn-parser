@@ -1,9 +1,9 @@
 import * as pl from 'pareto-core-lib'
 
-import * as gapi from "../api"
+import * as gapi from "../definition/glossary"
 import * as gtc from "glo-astn-tokenconsumer"
 
-import { CcreateHeaderParser } from "../api"
+import { CcreateHeaderParser } from "../definition/api.generated"
 
 export const $$:CcreateHeaderParser = ($d) => {
     function x <PAnnotation>($: null, $i: gapi.IHeaderParserHandler<PAnnotation>): gtc.ITokenConsumer<PAnnotation> {

@@ -1,6 +1,6 @@
 import * as pl from 'pareto-core-lib'
 
-import { CcreateTreeParserErrorMessage } from "../api"
+import { CcreateTreeParserErrorMessage } from "../definition/api.generated"
 
 export const $$:CcreateTreeParserErrorMessage = ($) => {
     switch ($[0]) {

@@ -1,6 +1,6 @@
 import * as pl from 'pareto-core-lib'
 
-import { CcreateHeaderParserErrorMessage } from "../api"
+import { CcreateHeaderParserErrorMessage } from "../definition/api.generated"
 
 export const $$:CcreateHeaderParserErrorMessage = ($) => {
     switch ($[0]) {
