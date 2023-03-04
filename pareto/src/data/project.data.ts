@@ -7,6 +7,9 @@ const d = pd.d
 import { $ as api } from "./api.data"
 import { $ as glossary } from "./glossary.data"
 
+import { external, this_ } from "lib-pareto-typescript-project/dist/submodules/project/shorthands"
+
+
 import { array, dictionary, group, member, string, taggedUnion, type } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
 export const $: gproject.T.Project<pd.SourceLocation> = {
@@ -22,8 +25,21 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
     'type': ['library', {
         'main': {
             'definition': {
-                'glossary': glossary,
-                'api': api,
+                'glossary': {
+                    'root': glossary,
+                    'imports': d({
+                        "common": external("glo-pareto-common"),
+                        "tc":  external("glo-astn-tokenconsumer"),
+                        "h":  external("glo-astn-handlers"),
+                    }),
+                },
+                'api': {
+                    'root': api,
+                    'imports': d({
+                        "common": external("glo-pareto-common"),
+                        "this": this_(),
+                    }),
+                },
             },
             'implementation': ['typescript', null],
         },
@@ -36,7 +52,6 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
             }),
             'glossary': {
                 'functions': d({}),
-                'imports': d({}),
                 'parameters': d({}),
                 'types': d({
                     "TestData": type(dictionary(group({
@@ -53,7 +68,7 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
                                     "open tagged union": group({}),
                                     "line comment": string(),
                                     "block comment": string(),
-                                    "schema data start": group({}),      
+                                    "schema data start": group({}),
                                 }),
                                 "parsingerror": group({
                                     "message": member(string()),
@@ -74,6 +89,7 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
                 }),
                 'interfaces': d({}),
             },
+            'imports': d({}),
         }
     }],
 }
