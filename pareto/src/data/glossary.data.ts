@@ -7,7 +7,7 @@ import {
     reference,
     boolean,
     typeReference,
-    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, method, type, context, glossaryParameter, parametrizedTypeReference, parametrizedReference
+    dictionary, group, member, taggedUnion, types, func, data, interfaceReference, inf, type, context, glossaryParameter, parametrizedTypeReference, parametrizedReference
 } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
 import * as gglossary from "lib-pareto-typescript-project/dist/submodules/glossary"
@@ -59,66 +59,67 @@ export const $: gglossary.T.Glossary<pd.SourceLocation> = {
                     "array": group({}),
                     "object": group({}),
                     "tagged union": group({}),
-                }))
+                })),
             }),
         })),
     }),
+    'builders': d({}),
     'interfaces': d({
-        "HeaderHandler": ['group', {
-            'members': d({
-                "onEmbeddedSchema": method(typeReference("EmbeddedSchema"), ['reference', {
-                    'context': context("tc", { "Annotation": typeReference("Annotation") }),
-                    'interface': "TokenConsumer"
-                }], false),
-                "onSchemaReference": method(typeReference("SchemaReference"), ['reference', {
-                    'context': context("tc", { "Annotation": typeReference("Annotation") }),
-                    'interface': "TokenConsumer"
-                }], false),
-                "onNoInternalSchema": method(typeReference("common", "Null"), ['reference', {
-                    'context': context("tc", { "Annotation": typeReference("Annotation") }),
-                    'interface': "TokenConsumer"
-                }], false),
-            }),
-        }],
+        // "HeaderHandler": ['group', {
+        //     'members': d({
+        //         "onEmbeddedSchema": method(typeReference("EmbeddedSchema"), ['reference', {
+        //             'context': context("tc", { "Annotation": typeReference("Annotation") }),
+        //             'interface': "TokenConsumer"
+        //         }], false),
+        //         "onSchemaReference": method(typeReference("SchemaReference"), ['reference', {
+        //             'context': context("tc", { "Annotation": typeReference("Annotation") }),
+        //             'interface': "TokenConsumer"
+        //         }], false),
+        //         "onNoInternalSchema": method(typeReference("common", "Null"), ['reference', {
+        //             'context': context("tc", { "Annotation": typeReference("Annotation") }),
+        //             'interface': "TokenConsumer"
+        //         }], false),
+        //     }),
+        // }],
 
 
-        // export type IHeaderHandler<PAnnotation> = {
-        //     readonly "onEmbeddedSchema": ($: {
-        //         readonly "headerAnnotation": PAnnotation
-        //         readonly "embeddedSchemaAnnotation": PAnnotation
-        //         readonly "schemaSchemaReferenceToken": h.T.SimpleStringToken<PAnnotation>
-        //     }) => tc.ITokenConsumer<PAnnotation>
-        //     readonly "onSchemaReference": ($: {
-        //         readonly "headerAnnotation": PAnnotation
-        //         readonly "token": h.T.SimpleStringToken<PAnnotation>
-        //     }) => tc.ITokenConsumer<PAnnotation>
-        //     readonly "onNoInternalSchema": () => tc.ITokenConsumer<PAnnotation>
-        // }
-        "HeaderParserHandler": ['group', {
-            'members': d({
-                "onError": method(typeReference("AnnotatedHeaderParserError")),
-                "handler": ['reference', interfaceReference("HeaderHandler")]
-            })
-        }],
-        "TreeParserHandler": ['group', {
-            'members': d({
-                "onError": method(typeReference("AnnotatedTreeParserError")),
-                "handler": ['reference', {
-                    'context': context("h", { "Annotation": typeReference("Annotation") }),
-                    'interface': "TreeHandler",
-                }]
-            })
-        }],
+        // // export type IHeaderHandler<PAnnotation> = {
+        // //     readonly "onEmbeddedSchema": ($: {
+        // //         readonly "headerAnnotation": PAnnotation
+        // //         readonly "embeddedSchemaAnnotation": PAnnotation
+        // //         readonly "schemaSchemaReferenceToken": h.T.SimpleStringToken<PAnnotation>
+        // //     }) => tc.ITokenConsumer<PAnnotation>
+        // //     readonly "onSchemaReference": ($: {
+        // //         readonly "headerAnnotation": PAnnotation
+        // //         readonly "token": h.T.SimpleStringToken<PAnnotation>
+        // //     }) => tc.ITokenConsumer<PAnnotation>
+        // //     readonly "onNoInternalSchema": () => tc.ITokenConsumer<PAnnotation>
+        // // }
+        // "HeaderParserHandler": ['group', {
+        //     'members': d({
+        //         "onError": method(typeReference("AnnotatedHeaderParserError")),
+        //         "handler": ['reference', interfaceReference("HeaderHandler")]
+        //     }),
+        // }],
+        // "TreeParserHandler": ['group', {
+        //     'members': d({
+        //         "onError": method(typeReference("AnnotatedTreeParserError")),
+        //         "handler": ['reference', {
+        //             'context': context("h", { "Annotation": typeReference("Annotation") }),
+        //             'interface': "TreeHandler",
+        //         }]
+        //     }),
+        // }],
     }),
     'functions': d({
-        "CreateHeaderParser": func(typeReference("common", "Null"), null, interfaceReference("HeaderParserHandler"), inf({
-            'context': context("tc", { "Annotation": typeReference("Annotation") }),
-            'interface': "TokenConsumer"
-        })),
-        "CreateTreeParser": func(typeReference("common", "Null"), null, interfaceReference("TreeParserHandler"), inf({
-            'context': context("tc", { "Annotation": typeReference("Annotation") }),
-            'interface': "TokenConsumer"
-        })),
+        // "CreateHeaderParser": func(typeReference("common", "Null"), null, interfaceReference("HeaderParserHandler"), inf({
+        //     'context': context("tc", { "Annotation": typeReference("Annotation") }),
+        //     'interface': "TokenConsumer"
+        // })),
+        // "CreateTreeParser": func(typeReference("common", "Null"), null, interfaceReference("TreeParserHandler"), inf({
+        //     'context': context("tc", { "Annotation": typeReference("Annotation") }),
+        //     'interface': "TokenConsumer"
+        // })),
         "CreateHeaderParserErrorMessage": func(typeReference("HeaderParserError"), null, null, data(typeReference("common", "String"), false)),
         "CreateTreeParserErrorMessage": func(typeReference("TreeParserError"), null, null, data(typeReference("common", "String"), false)),
     }),

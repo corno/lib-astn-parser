@@ -79,14 +79,15 @@ export const $: gproject.T.Project<pd.SourceLocation> = {
                                 "tree end": group({}),
                                 "tagged union end": group({}),
                                 "missing": group({}),
-                            })))
+                            }))),
                         }))),
                         "type": member(taggedUnion({
                             "json": group({}),
                             "astn": group({}),
-                        }))
-                    })))
+                        })),
+                    }))),
                 }),
+                'builders': d({}),
                 'interfaces': d({}),
             },
             'imports': d({}),

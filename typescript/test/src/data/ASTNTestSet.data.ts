@@ -355,24 +355,24 @@ export const $: api.T.TestData.D.definitions = d({
                     'a1': (
                         'type': | 'value' (
                             'type': | 'number' (
-                            )
-                        )
-                    )
+                            ),
+                        ),
+                    ),
                     'b': (
                         'type': | 'value' (
                             'type': | 'number' (
-                            )
-                        )
-                    )
+                            ),
+                        ),
+                    ),
                     'c': (
                         'type': | 'value' (
                             'type': | 'text' (
-                            )
-                        )
-                    )
+                            ),
+                        ),
+                    ),
                 }
-            )
-        )
+            ),
+        ),
     }
     'root type': 'root'
 ){
@@ -466,19 +466,19 @@ export const $: api.T.TestData.D.definitions = d({
                     'foo': (
                         'type': | 'value' (
                             'type': | 'number' /*problem here*/
-                        )
-                    )
+                        ),
+                    ),
                     'bar': (
                         'type': | 'taggedunion' (
                             'type': | 'number'
-                        )
-                    )
+                        ),
+                    ),
                 }
-            )
-        )
+            ),
+        ),
     }
     'root type': "x"
-)
+),
 (
     'foov': 42
 )`,

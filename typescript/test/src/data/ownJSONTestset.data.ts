@@ -49,7 +49,7 @@ export const $: api.T.TestData.D.definitions = d({
             missing(),
             closeObject(),
             treeEnd(),
-            streamEnd()
+            streamEnd(),
         ],
     ),
     "just a string": test(
@@ -1004,7 +1004,7 @@ export const $: api.T.TestData.D.definitions = d({
             instanceDataStart(),
             openCurly(),
             parsingerror("unexpected end of text, still in object"),
-            streamEnd()
+            streamEnd(),
         ],
     ),
     "wrong inline formatting": test(
@@ -1043,4 +1043,4 @@ export const $: api.T.TestData.D.definitions = d({
             streamEnd(),
         ],
     ),
-})
+}),

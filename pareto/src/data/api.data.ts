@@ -16,5 +16,5 @@ export const $: gapi.T.API<pd.SourceLocation> = {
 
         })),
         "createTreeParserErrorMessage": algorithm(functionReference("this", {}, "CreateTreeParserErrorMessage")),
-    })
+    }),
 }
