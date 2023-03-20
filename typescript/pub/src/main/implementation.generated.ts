@@ -1,10 +1,10 @@
-import { API } from "./definition/api.generated"
-import { $$ as icreateHeaderParser } from "./implementations/createHeaderParser.p"
-import { $$ as icreateHeaderParserErrorMessage } from "./implementations/createHeaderParserErrorMessage.p"
-import { $$ as icreateTreeParser } from "./implementations/createTreeParser.p"
-import { $$ as icreateTreeParserErrorMessage } from "./implementations/createTreeParserErrorMessage.p"
+import { API } from "./api.generated"
+import { $$ as icreateHeaderParser } from "./implementations/createHeaderParser.a.c"
+import { $$ as icreateHeaderParserErrorMessage } from "./implementations/createHeaderParserErrorMessage.s.f"
+import { $$ as icreateTreeParser } from "./implementations/createTreeParser.a.c"
+import { $$ as icreateTreeParserErrorMessage } from "./implementations/createTreeParserErrorMessage.s.f"
 
-export const $a: API = {
+export const $api: API = {
     'createHeaderParser': icreateHeaderParser,
     'createHeaderParserErrorMessage': icreateHeaderParserErrorMessage,
     'createTreeParser': icreateTreeParser,

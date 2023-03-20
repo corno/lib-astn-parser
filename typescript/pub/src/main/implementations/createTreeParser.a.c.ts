@@ -1,24 +1,24 @@
 import * as pl from 'pareto-core-lib'
 import * as ps from 'pareto-core-state'
 
-import * as gapi from "../definition/glossary"
-import * as gh from "glo-astn-handlers"
-import * as gtc from "glo-astn-tokenconsumer"
+import * as g_this from "../glossary"
+import * as g_h from "glo-astn-handlers"
+import * as g_tc from "glo-astn-tokenconsumer"
 
-import { CcreateTreeParser } from "../definition/api.generated"
+import { A } from "../api.generated"
 
-export const $$:CcreateTreeParser = ($d: {}) => {
+export const $$: A.createTreeParser = <GAnnotation>(): g_this.ASYNC.A.C.CreateTreeParser<GAnnotation> => {
+    return ($is) => {
 
-    return <PAnnotation>($: null, $i: gapi.ITreeParserHandler<PAnnotation>) => {
 
         function createTreeParser(
-        ): gtc.ITokenConsumer<PAnnotation> {
+        ): g_tc.ASYNC.I.TokenConsumer<GAnnotation> {
 
             type ObjectContext = {
                 type:
                 | ['dictionary', null]
                 | ['verbose group', null]
-                readonly objectHandler: gh.IObjectHandler<PAnnotation>
+                readonly objectHandler: g_h.ASYNC.I.ObjectHandler<GAnnotation>
             }
 
             type ArrayContext = {
@@ -26,15 +26,15 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                 | ['list', null]
                 | ['shorthand group', null]
                 foundElements: boolean
-                readonly arrayHandler: gh.IArrayHandler<PAnnotation>
+                readonly arrayHandler: g_h.ASYNC.I.ArrayHandler<GAnnotation>
             }
 
             type TaggedUnionContext = {
-                readonly handler: gh.ITaggedUnionHandler<PAnnotation>
+                readonly handler: g_h.ASYNC.I.TaggedUnionHandler<GAnnotation>
             }
 
             type ExpectingValue = {
-                handler: gh.IRequiredValueHandler<PAnnotation>
+                handler: g_h.ASYNC.I.RequiredValueHandler<GAnnotation>
             }
 
             type ContextType =
@@ -54,15 +54,15 @@ export const $$:CcreateTreeParser = ($d: {}) => {
 
             let state2: State2 = ['processing', {
                 currentContext: ['expecting value', {
-                    handler: $i.handler.root
+                    handler: $is.handler
                 }],
                 stack: ps.createEmptyStack(),
             }]
 
             return {
-                onToken: (token) => {
-                    function raiseError(error: gapi.T.TreeParserError<PAnnotation>) {
-                        $i.onError({
+                'data': (token) => {
+                    function raiseError(error: g_this.T.TreeParserError<GAnnotation>) {
+                        $is.errorHandler.data({
                             error: error,
                             annotation: token.annotation,
                         })
@@ -96,7 +96,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                         break
                                                     case 'processing taggedunion':
                                                         pl.cc(previousContext[1], ($) => {
-                                                            $.handler.onEnd()
+                                                            //FIXME NO LONGER NEEDED???? $.handler.onEnd()
                                                             pop()
                                                         })
                                                         break
@@ -105,7 +105,8 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                             },
                                             () => {
 
-                                                $i.handler.onEnd()
+                                                //FIXME NO LONGER NEEDED ????? $is.handler.end()
+
                                                 state2 = ['done', null]
                                             }
                                         )
@@ -117,7 +118,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                         processing.currentContext = newContext
                                     }
                                     function testForValue(
-                                        onValue: () => gh.IValueHandler<PAnnotation>,
+                                        onValue: () => g_h.ASYNC.I.ValueHandler<GAnnotation>,
                                         onNonValue: (
                                             token:
                                                 | ['close object', null]
@@ -149,7 +150,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                     arrayHandler: onValue().array({
                                                                         annotation: token.annotation,
                                                                         token: {
-                                                                            type: ['shorthand group', {}]
+                                                                            type: ['shorthand group', null]
                                                                         }
 
                                                                     }),
@@ -166,7 +167,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                     arrayHandler: onValue().array({
                                                                         annotation: token.annotation,
                                                                         token: {
-                                                                            type: ['list', {}]
+                                                                            type: ['list', null]
                                                                         }
                                                                     }),
                                                                 }]
@@ -187,7 +188,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                     objectHandler: onValue().object({
                                                                         annotation: token.annotation,
                                                                         token: {
-                                                                            type: ['dictionary', {}]
+                                                                            type: ['dictionary', null]
                                                                         }
                                                                     }),
                                                                 }]
@@ -203,7 +204,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                     objectHandler: onValue().object({
                                                                         annotation: token.annotation,
                                                                         token: {
-                                                                            type: ['verbose group', {}]
+                                                                            type: ['verbose group', null]
                                                                         }
                                                                     }),
                                                                 }]
@@ -215,8 +216,8 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                             push(
                                                                 ['processing taggedunion', {
                                                                     handler: onValue().taggedUnion({
-                                                                            annotation: token.annotation,
-                                                                            token: {}
+                                                                        annotation: token.annotation,
+                                                                        token: null
                                                                     })
                                                                 }]
                                                             )
@@ -274,7 +275,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                             pl.cc($.currentContext[1], ($) => {
                                                 const arrayContext = $
                                                 testForValue(
-                                                    () => $.arrayHandler.element(token.annotation),
+                                                    () => $.arrayHandler.data(token.annotation),
                                                     ($) => {
                                                         switch ($[0]) {
                                                             case 'close object':
@@ -284,9 +285,9 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                                 break
                                                             case 'close array':
                                                                 pl.cc($[1], ($) => {
-                                                                    arrayContext.arrayHandler.onEnd({
+                                                                    arrayContext.arrayHandler.end({
                                                                         annotation: token.annotation,
-                                                                        token: {},
+                                                                        token: null,
                                                                     })
                                                                     pop()
                                                                 })
@@ -306,7 +307,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                 if (token.token[0] === 'simple string') {
                                                     push(
                                                         ['expecting value', {
-                                                            handler: objectContext.objectHandler.property({
+                                                            handler: objectContext.objectHandler.data.property({
                                                                 annotation: token.annotation,
                                                                 token: token.token[1]
                                                             })
@@ -316,13 +317,13 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                                                     testForValue(
                                                         () => {
                                                             raiseError(['missing key', null])
-                                                            return objectContext.objectHandler.anonymousProperty(token.annotation)
+                                                            return objectContext.objectHandler.data.anonymousProperty(token.annotation)
                                                         },
                                                         ($) => {
                                                             if ($[0] === 'close object') {
-                                                                objectContext.objectHandler.onEnd({
+                                                                objectContext.objectHandler.end({
                                                                     annotation: token.annotation,
-                                                                    token: {},
+                                                                    token: null,
                                                                 })
                                                                 pop()
                                                             } else {
@@ -384,9 +385,9 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                     }
                     handleToken()
                 },
-                onEnd: (endAnnotation) => {
-                    function raiseError(error: gapi.T.TreeParserError<PAnnotation>) {
-                        $i.onError({
+                'end': (endAnnotation) => {
+                    function raiseError(error: g_this.T.TreeParserError<GAnnotation>) {
+                        $is.errorHandler.data({
                             error: error,
                             annotation: endAnnotation,
                         })
@@ -431,6 +432,7 @@ export const $$:CcreateTreeParser = ($d: {}) => {
                             break
                         default: pl.au(state2[0])
                     }
+                    $is.errorHandler.end()
                 },
             }
         }

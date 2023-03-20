@@ -1,33 +1,33 @@
 import * as pl from 'pareto-core-lib'
 
-import * as gapi from "../definition/glossary"
-import * as gtc from "glo-astn-tokenconsumer"
+import * as g_this from "../glossary"
+import * as g_tc from "glo-astn-tokenconsumer"
 
-import { CcreateHeaderParser } from "../definition/api.generated"
+import { A } from "../api.generated"
 
-export const $$:CcreateHeaderParser = ($d) => {
-    function x <PAnnotation>($: null, $i: gapi.IHeaderParserHandler<PAnnotation>): gtc.ITokenConsumer<PAnnotation> {
+export const $$: A.createHeaderParser = <GAnnotation>(): g_this.ASYNC.A.C.CreateHeaderParser<GAnnotation> => {
+    return ($is) => {
         type RootContext = {
             state:
             | ['expecting header or body', {}]
             | ['expecting schema reference or embedded schema', {
-                headerAnnotation: PAnnotation
+                headerAnnotation: GAnnotation
             }]
             | ['expecting schema schema reference', {
-                headerAnnotation: PAnnotation
-                embeddedSchemaAnnotation: PAnnotation
+                headerAnnotation: GAnnotation
+                embeddedSchemaAnnotation: GAnnotation
             }]
             | ['header is parsed', {
-                parser: gtc.ITokenConsumer<PAnnotation>
+                parser: g_tc.ASYNC.I.TokenConsumer<GAnnotation>
             }]
         }
 
         const rootContext: RootContext = { state: ['expecting header or body', {}] }
 
         return {
-            onEnd: (annotation) => {
-                function raiseError(error: gapi.T.HeaderParserError<PAnnotation>) {
-                    $i.onError({
+            'end': (annotation) => {
+                function raiseError(error: g_this.T.HeaderParserError<GAnnotation>) {
+                    $is.errorHandler.data({
                         error: error,
                         annotation: annotation,
                     })
@@ -48,17 +48,18 @@ export const $$:CcreateHeaderParser = ($d) => {
                     }
                     case 'header is parsed': {
                         const $$ = rootContext.state[1]
-                        $$.parser.onEnd(annotation)
+                        $$.parser.end(annotation)
                         break
                     }
                     default:
                         pl.au(rootContext.state[0])
                 }
+                $is.errorHandler.end()
             },
-            onToken: ($) => {
+            'data': ($) => {
                 const data = $
-                function raiseError(error: gapi.T.HeaderParserError<PAnnotation>) {
-                    $i.onError({
+                function raiseError(error: g_this.T.HeaderParserError<GAnnotation>) {
+                    $is.errorHandler.data({
                         error: error,
                         annotation: $.annotation,
                     })
@@ -70,11 +71,11 @@ export const $$:CcreateHeaderParser = ($d) => {
                                 headerAnnotation: $.annotation,
                             }]
                         } else {
-                            const bp = $i.handler.onNoInternalSchema(null)
+                            const bp = $is.handler.onNoInternalSchema()
                             rootContext.state = ['header is parsed', {
                                 parser: bp,
                             }]
-                            bp.onToken(data)
+                            bp.data(data)
                         }
                         break
                     }
@@ -96,7 +97,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                             }
                             case 'simple string': {
                                 pl.cc($.token[1], ($) => {
-                                    const bp = $i.handler.onSchemaReference({
+                                    const bp = $is.handler.onSchemaReference({
                                         headerAnnotation: headerAnnotation,
                                         token: {
                                             token: $,
@@ -126,7 +127,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                         if ($.token[0] !== 'simple string') {
                             raiseError(['expected a schema schema reference', null])
                         } else {
-                            const x = $i.handler.onEmbeddedSchema({
+                            const x = $is.handler.onEmbeddedSchema({
                                 headerAnnotation: headerAnnotation,
                                 embeddedSchemaAnnotation: embeddedSchemaAnnotation,
                                 schemaSchemaReferenceToken: {
@@ -181,7 +182,7 @@ export const $$:CcreateHeaderParser = ($d) => {
                             pl.panic("UNEXPECTED HEADER (ALREADY PARSED)")
                             //raiseError([""])
                         } else {
-                            parser.onToken(data)
+                            parser.data(data)
                         }
                         break
                     }
@@ -191,5 +192,4 @@ export const $$:CcreateHeaderParser = ($d) => {
             },
         }
     }
-    return x
 }
