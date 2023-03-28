@@ -6,9 +6,9 @@ import * as g_test from "lib-pareto-test"
 
 import * as g_pub from "../../../../../pub/dist"
 
-import { getTestSet } from "../api.generated"
+import { A } from "../api.generated"
 
-export const $$:getTestSet = () => {
+export const $$: A.getTestSet = () => {
 
     const builder = ps.createUnsafeDictionaryBuilder<g_test.T.TestElement>()
     function createTest(name: string, actual: string, expected: string) {
