@@ -1,6 +1,6 @@
 import * as pd from 'pareto-core-data'
 
-import { constructor, aInterfaceMethod, aInterfaceReference, data, externalTypeReference, glossaryParameter, group, imp, member, ref, sfunction, streamconsumer, taggedUnion, type, typeReference } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
+import { constructor, aInterfaceMethod, aInterfaceReference, data, externalTypeReference, glossaryParameter, group, imp, member, ref, sfunction, streamconsumer, taggedUnion, type, typeReference, aExternalInterfaceReference, aInterface } from "lib-pareto-typescript-project/dist/submodules/glossary/shorthands"
 
 import * as g_glossary from "lib-pareto-typescript-project/dist/submodules/glossary"
 
@@ -19,17 +19,17 @@ export const $: g_glossary.T.Glossary<pd.SourceLocation> = {
         'namespaces': d({}),
         'types': d({
             "AnnotatedHeaderParserError": type(group({
-                "annotation": member(glossaryParameter("Annotation")),
+                "annotation": member(ref(glossaryParameter("Annotation"))),
                 "error": member(ref(typeReference("HeaderParserError"))),
             })),
             "AnnotatedTreeParserError": type(group({
-                "annotation": member(glossaryParameter("Annotation")),
+                "annotation": member(ref(glossaryParameter("Annotation"))),
                 "error": member(ref(typeReference("TreeParserError"))),
             })),
-            "Annotation": type(glossaryParameter("Annotation")),
+            "Annotation": type(ref(glossaryParameter("Annotation"))),
             "EmbeddedSchema": type(group({
-                "headerAnnotation": member(glossaryParameter("Annotation")),
-                "embeddedSchemaAnnotation": member(glossaryParameter("Annotation")),
+                "headerAnnotation": member(ref(glossaryParameter("Annotation"))),
+                "embeddedSchemaAnnotation": member(ref(glossaryParameter("Annotation"))),
                 "schemaSchemaReferenceToken": member(ref(externalTypeReference("h", "SimpleStringToken"))),
             })),
             "HeaderParserError": type(taggedUnion({
@@ -39,7 +39,7 @@ export const $: g_glossary.T.Glossary<pd.SourceLocation> = {
                 "expected a schema schema reference": group({}),
             })),
             "SchemaReference": type(group({
-                "headerAnnotation": member(glossaryParameter("Annotation")),
+                "headerAnnotation": member(ref(glossaryParameter("Annotation"))),
                 "token": member(ref(externalTypeReference("h", "SimpleStringToken"))),
             })),
             "TreeParserError": type(taggedUnion({
@@ -65,30 +65,30 @@ export const $: g_glossary.T.Glossary<pd.SourceLocation> = {
     },
     'asynchronous': {
         'interfaces': d({
-            "HeaderParserHandler": ['choice', {
+            "HeaderParserHandler": aInterface( ['choice', {
                 'options': d({
-                    "onEmbeddedSchema": aInterfaceMethod(typeReference("EmbeddedSchema"), ['reference', aInterfaceReference("tc", "TokenConsumer")]),
-                    "onSchemaReference": aInterfaceMethod(typeReference("SchemaReference"), ['reference', aInterfaceReference("tc", "TokenConsumer")]),
-                    "onNoInternalSchema": aInterfaceMethod(null, ['reference', aInterfaceReference("tc", "TokenConsumer")]),
+                    "onEmbeddedSchema": aInterfaceMethod(typeReference("EmbeddedSchema"), ['reference', aExternalInterfaceReference("tc", "TokenConsumer")]),
+                    "onSchemaReference": aInterfaceMethod(typeReference("SchemaReference"), ['reference', aExternalInterfaceReference("tc", "TokenConsumer")]),
+                    "onNoInternalSchema": aInterfaceMethod(null, ['reference', aExternalInterfaceReference("tc", "TokenConsumer")]),
                 }),
-            }],
-            "HeaderParserErrorHandler": streamconsumer(
+            }]),
+            "HeaderParserErrorHandler": aInterface( streamconsumer(
                 aInterfaceMethod(typeReference("AnnotatedHeaderParserError")),
                 aInterfaceMethod(null),
-            ),
-            "TreeParserErrorHandler": streamconsumer(
+            )),
+            "TreeParserErrorHandler": aInterface( streamconsumer(
                 aInterfaceMethod(typeReference("AnnotatedTreeParserError")),
                 aInterfaceMethod(null),
-            ),
+            )),
         }),
         'algorithms': d({
-            "CreateHeaderParser": constructor(aInterfaceReference("tc", "TokenConsumer"), {
+            "CreateHeaderParser": constructor(aExternalInterfaceReference("tc", "TokenConsumer"), {
                 "handler": aInterfaceReference("HeaderParserHandler"),
                 "errorHandler": aInterfaceReference("HeaderParserErrorHandler"),
 
             }),
-            "CreateTreeParser": constructor(aInterfaceReference("tc", "TokenConsumer"), {
-                "handler": aInterfaceReference("h", "RequiredValueHandler"),
+            "CreateTreeParser": constructor(aExternalInterfaceReference("tc", "TokenConsumer"), {
+                "handler": aExternalInterfaceReference("h", "RequiredValueHandler"),
                 "errorHandler": aInterfaceReference("TreeParserErrorHandler"),
 
             }),
