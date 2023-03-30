@@ -31,18 +31,22 @@ export namespace ASYNC {
         
         
         export namespace C {
-            export type CreateHeaderParser<GAnnotation> = ($is: {
-                readonly 'errorHandler': ASYNC.I.HeaderParserErrorHandler<GAnnotation>
-                readonly 'handler': ASYNC.I.HeaderParserHandler<GAnnotation>
-            }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+            export type CreateHeaderParser<GAnnotation> = {
+                'construct': ($is: {
+                    readonly 'errorHandler': ASYNC.I.HeaderParserErrorHandler<GAnnotation>
+                    readonly 'handler': ASYNC.I.HeaderParserHandler<GAnnotation>
+                }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+            }
         }
         
         
         export namespace C {
-            export type CreateTreeParser<GAnnotation> = ($is: {
-                readonly 'errorHandler': ASYNC.I.TreeParserErrorHandler<GAnnotation>
-                readonly 'handler': g_h.ASYNC.I.RequiredValueHandler<T.Annotation<GAnnotation>>
-            }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+            export type CreateTreeParser<GAnnotation> = {
+                'construct': ($is: {
+                    readonly 'errorHandler': ASYNC.I.TreeParserErrorHandler<GAnnotation>
+                    readonly 'handler': g_h.ASYNC.I.RequiredValueHandler<T.Annotation<GAnnotation>>
+                }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+            }
         }
     }
 }
