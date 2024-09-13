@@ -16,9 +16,9 @@ export namespace ASYNC {
         }
         
         export type HeaderParserHandler<GAnnotation> = {
-            readonly 'onEmbeddedSchema': ($: T.EmbeddedSchema<GAnnotation>, ) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
-            readonly 'onNoInternalSchema': () => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
-            readonly 'onSchemaReference': ($: T.SchemaReference<GAnnotation>, ) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+            readonly 'onEmbeddedSchema': ($: T.EmbeddedSchema<GAnnotation>, ) => g_tc.ASYNC.I.TokenConsumer
+            readonly 'onNoInternalSchema': () => g_tc.ASYNC.I.TokenConsumer
+            readonly 'onSchemaReference': ($: T.SchemaReference<GAnnotation>, ) => g_tc.ASYNC.I.TokenConsumer
         }
         
         export type TreeParserErrorHandler<GAnnotation> = {
@@ -35,7 +35,7 @@ export namespace ASYNC {
                 'construct': ($is: {
                     readonly 'errorHandler': ASYNC.I.HeaderParserErrorHandler<GAnnotation>
                     readonly 'handler': ASYNC.I.HeaderParserHandler<GAnnotation>
-                }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+                }) => g_tc.ASYNC.I.TokenConsumer
             }
         }
         
@@ -44,8 +44,8 @@ export namespace ASYNC {
             export type CreateTreeParser<GAnnotation> = {
                 'construct': ($is: {
                     readonly 'errorHandler': ASYNC.I.TreeParserErrorHandler<GAnnotation>
-                    readonly 'handler': g_h.ASYNC.I.RequiredValueHandler<T.Annotation<GAnnotation>>
-                }) => g_tc.ASYNC.I.TokenConsumer<T.Annotation<GAnnotation>>
+                    readonly 'handler': g_h.ASYNC.I.RequiredValueHandler
+                }) => g_tc.ASYNC.I.TokenConsumer
             }
         }
     }

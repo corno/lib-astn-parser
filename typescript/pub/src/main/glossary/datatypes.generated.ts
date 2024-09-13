@@ -40,13 +40,13 @@ export namespace T {
         
         export type headerAnnotation<GAnnotation> = GAnnotation
         
-        export type schemaSchemaReferenceToken<GAnnotation> = g_h.T.SimpleStringToken<T.Annotation<GAnnotation>>
+        export type schemaSchemaReferenceToken<GAnnotation> = g_h.T.SimpleStringToken
     }
     
     export type EmbeddedSchema<GAnnotation> = {
         readonly 'embeddedSchemaAnnotation': GAnnotation
         readonly 'headerAnnotation': GAnnotation
-        readonly 'schemaSchemaReferenceToken': g_h.T.SimpleStringToken<T.Annotation<GAnnotation>>
+        readonly 'schemaSchemaReferenceToken': g_h.T.SimpleStringToken
     }
     
     export namespace HeaderParserError {
@@ -78,12 +78,12 @@ export namespace T {
         
         export type headerAnnotation<GAnnotation> = GAnnotation
         
-        export type token<GAnnotation> = g_h.T.SimpleStringToken<T.Annotation<GAnnotation>>
+        export type token<GAnnotation> = g_h.T.SimpleStringToken
     }
     
     export type SchemaReference<GAnnotation> = {
         readonly 'headerAnnotation': GAnnotation
-        readonly 'token': g_h.T.SimpleStringToken<T.Annotation<GAnnotation>>
+        readonly 'token': g_h.T.SimpleStringToken
     }
     
     export namespace TreeParserError {
